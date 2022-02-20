@@ -1,7 +1,9 @@
 package vjvm.vm;
 
 import picocli.CommandLine;
-import vjvm.utils.UnimplementedException;
+import vjvm.classfiledefs.Descriptors;
+import vjvm.runtime.JClass;
+import vjvm.utils.UnimplementedError;
 
 import java.util.concurrent.Callable;
 
@@ -39,7 +41,7 @@ class Run implements Callable<Integer> {
 
   @Override
   public Integer call() {
-    throw new UnimplementedException();
+    throw new UnimplementedError("You will implement this in lab 2");
   }
 
 }
@@ -55,6 +57,25 @@ class Dump implements Callable<Integer> {
 
   @Override
   public Integer call() {
-    throw new UnimplementedException();
+    var ctx = new VMContext(parent.userClassPath);
+
+    // the package vjvm.classfiledefs contains some constants and utility
+    // functions that we provided for your convenience
+    // please check the individual files for more information
+    var descriptor = Descriptors.of(className);
+
+    var clazz = ctx.userLoader().loadClass(descriptor);
+    if (clazz == null) {
+      // you can print anything to System.err; we won't check it
+      System.err.printf("Can not find class %s\n", className);
+      return -1;
+    }
+
+    dump(clazz);
+    return 0;
+  }
+
+  private void dump(JClass clazz) {
+    throw new UnimplementedError("TODO: dump clazz in lab 1.2; remove this for 1.1");
   }
 }
