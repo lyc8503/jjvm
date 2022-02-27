@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.PrintStream;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.function.BiConsumer;
@@ -13,11 +14,12 @@ import java.util.function.Consumer;
 
 import org.junit.jupiter.api.Test;
 
+import lombok.var;
 import lombok.SneakyThrows;
 
 public class DumpClasses {
-  final Path resPath = Path.of(System.getenv("VJVM_TESTRES_PATH"));
-  final Path resultPath = Path.of(System.getenv("VJVM_TESTRESULT_PATH"));
+  final Path resPath = FileSystems.getDefault().getPath(System.getenv("VJVM_TESTRES_PATH"));
+  final Path resultPath = FileSystems.getDefault().getPath(System.getenv("VJVM_TESTRESULT_PATH"));
   final Path jarPath = resPath.resolve("lab1/cases/jar.jar");
 
   @Test
@@ -36,7 +38,7 @@ public class DumpClasses {
 
   @SneakyThrows
   void checkDump(String path, String clazz) {
-    var expected = Files.readString(resultPath.resolve(clazz.replace('.', '/') + ".dump"));
+    var expected = new String(Files.readAllBytes(resultPath.resolve(clazz.replace('.', '/') + ".dump")));
 
     // capture stdout
     var oldStdout = System.out;

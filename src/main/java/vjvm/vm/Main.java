@@ -1,5 +1,6 @@
 package vjvm.vm;
 
+import lombok.var;
 import picocli.CommandLine;
 import vjvm.classfiledefs.Descriptors;
 import vjvm.runtime.JClass;
