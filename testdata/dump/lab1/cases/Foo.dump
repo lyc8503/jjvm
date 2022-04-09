@@ -1,9 +1,11 @@
+
 class name: lab1/cases/Foo
 minor version: 0
 major version: 52
 flags: 0x20
 this class: lab1/cases/Foo
 super class: java/lang/Object
+
 
 constant pool:
 #1 = Methodref: java/lang/Object.<init>:()V
@@ -30,22 +32,19 @@ constant pool:
 #23 = Utf8: "()V"
 #24 = Utf8: "Code"
 #25 = Utf8: "LineNumberTable"
-#26 = Utf8: "LocalVariableTable"
-#27 = Utf8: "this"
-#28 = Utf8: "Llab1/cases/Foo;"
-#29 = Utf8: "close"
-#30 = Utf8: "<clinit>"
-#31 = Utf8: "SourceFile"
-#32 = Utf8: "Foo.java"
-#33 = NameAndType: <init>:()V
-#34 = NameAndType: a:I
-#35 = Utf8: "foo"
-#36 = NameAndType: c:Ljava/lang/String;
-#37 = NameAndType: d:F
-#38 = NameAndType: b:J
-#39 = Utf8: "lab1/cases/Foo"
-#40 = Utf8: "java/lang/Object"
-#41 = Utf8: "java/io/Closeable"
+#26 = Utf8: "close"
+#27 = Utf8: "<clinit>"
+#28 = Utf8: "SourceFile"
+#29 = Utf8: "Foo.java"
+#30 = NameAndType: <init>:()V
+#31 = NameAndType: a:I
+#32 = Utf8: "foo"
+#33 = NameAndType: c:Ljava/lang/String;
+#34 = NameAndType: d:F
+#35 = NameAndType: b:J
+#36 = Utf8: "lab1/cases/Foo"
+#37 = Utf8: "java/lang/Object"
+#38 = Utf8: "java/io/Closeable"
 
 interfaces:
 java/io/Closeable
