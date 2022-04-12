@@ -35,7 +35,7 @@ public class JClassLoader implements Closeable {
     throw new UnimplementedError("TODO: load class");
 
     // To construct a JClass, use the following constructor
-    // return new JClass(null, this);
+    // return new JClass(new DataInputStream(istream_from_file), this);
   }
 
   @Override

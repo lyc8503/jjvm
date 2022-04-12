@@ -10,7 +10,7 @@ public class VMContext {
   @Getter
   private final JClassLoader userLoader;
 
-  VMContext(String userClassPath) {
+  public VMContext(String userClassPath) {
     bootstrapLoader = new JClassLoader(
       null,
       ClassSearchPath.constructSearchPath("sun.boot.class.path"),
