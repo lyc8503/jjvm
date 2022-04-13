@@ -1,8 +1,10 @@
 package vjvm.vm;
 
 import lombok.Getter;
+import lombok.var;
 import vjvm.classloader.JClassLoader;
 import vjvm.classloader.searchpath.ClassSearchPath;
+import vjvm.classloader.searchpath.ModuleSearchPath;
 
 public class VMContext {
   @Getter
@@ -13,7 +15,7 @@ public class VMContext {
   public VMContext(String userClassPath) {
     bootstrapLoader = new JClassLoader(
       null,
-      ClassSearchPath.constructSearchPath("sun.boot.class.path"),
+      getSystemSearchPaths(),
       this
     );
 
@@ -22,5 +24,16 @@ public class VMContext {
       ClassSearchPath.constructSearchPath(userClassPath),
       this
     );
+  }
+
+  private static ClassSearchPath[] getSystemSearchPaths() {
+    var bootClassPath = System.getProperty("sun.boot.class.path");
+
+    if (bootClassPath != null) {
+      return ClassSearchPath.constructSearchPath(bootClassPath);
+    }
+
+    // For compatibility with JDK9+
+    return new ClassSearchPath[] { new ModuleSearchPath() };
   }
 }
