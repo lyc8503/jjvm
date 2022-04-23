@@ -14,26 +14,23 @@ public abstract class Constant {
   @SneakyThrows
   public static Pair<Constant, Integer> constructFromData(DataInput input, JClass jClass) {
     var tag = input.readByte();
-    var count = tag == CONSTANT_Double ? 2 : 1;
+    var count = 1;
 
-    // TODO: construct Class, Fieldref, Methodref, InterfaceMethodref, String, and Long
+    // TODO: construct Utf8, Float, Double Class, Fieldref, Methodref, InterfaceMethodref, String, and Long
     Constant result;
     switch (tag) {
       case CONSTANT_Integer:
         result = new IntegerConstant(input);
         break;
-      case CONSTANT_Float:
-        result = new FloatConstant(input);
-        break;
-      case CONSTANT_Double:
-        result = new DoubleConstant(input);
-        break;
       case CONSTANT_NameAndType:
         result = new NameAndTypeConstant(input, jClass);
         break;
-      case CONSTANT_Utf8:
-        result = new UTF8Constant(input);
+      case CONSTANT_Utf8: {
+        var length = input.readUnsignedShort();
+        result = new UnknownConstant(input, length);
         break;
+      }
+      case CONSTANT_Double:
       case CONSTANT_Long:
         result = new UnknownConstant(input, 8);
         break;
@@ -45,6 +42,7 @@ public abstract class Constant {
       case CONSTANT_MethodType:
         result = new UnknownConstant(input, 2);
         break;
+      case CONSTANT_Float:
       case CONSTANT_Fieldref:
       case CONSTANT_Methodref:
       case CONSTANT_InterfaceMethodref:
