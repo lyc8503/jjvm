@@ -26,8 +26,7 @@ public abstract class Constant {
         result = new NameAndTypeConstant(input, jClass);
         break;
       case CONSTANT_Utf8: {
-        var length = input.readUnsignedShort();
-        result = new UnknownConstant(input, length);
+        result = new UTF8Constant(input);
         break;
       }
       case CONSTANT_Double:
