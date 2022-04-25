@@ -52,6 +52,14 @@ public class JClass {
         + "methods, and attributes from dataInput in lab 1.2; remove this for lab 1.1");
   }
 
+  public MethodInfo findMethod(String name, String descriptor) {
+    for (var method : methods)
+      if (method.name().equals(name) && method.descriptor().equals(descriptor))
+        return method;
+
+    return null;
+  }
+
   public boolean public_() {
     return (accessFlags & ACC_PUBLIC) != 0;
   }
@@ -104,4 +112,7 @@ public class JClass {
     return methods[index];
   }
 
+  public String name() {
+    throw new UnimplementedError("TODO: return class name from thisClass");
+  }
 }
