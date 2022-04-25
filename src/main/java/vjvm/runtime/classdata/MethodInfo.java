@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import vjvm.runtime.JClass;
 import vjvm.runtime.classdata.attribute.Attribute;
+import vjvm.runtime.classdata.attribute.Code;
 import vjvm.utils.UnimplementedError;
 
 import java.io.DataInput;
@@ -20,6 +21,11 @@ public class MethodInfo {
   private final Attribute[] attributes;
   @Getter
   private JClass jClass;
+
+  // if this method doesn't hava code attribute
+  // (which is the case of native methods), then code is null.
+  @Getter
+  private Code code;
 
   @SneakyThrows
   public MethodInfo(DataInput dataInput, JClass jClass) {
