@@ -32,6 +32,7 @@ public abstract class Constant {
       case CONSTANT_Double:
       case CONSTANT_Long:
         result = new UnknownConstant(input, 8);
+        count = 2;
         break;
       case CONSTANT_MethodHandle:
         result = new UnknownConstant(input, 3);
