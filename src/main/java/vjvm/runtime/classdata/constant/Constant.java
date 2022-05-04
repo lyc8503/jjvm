@@ -16,7 +16,7 @@ public abstract class Constant {
     var tag = input.readByte();
     var count = 1;
 
-    // TODO: construct Utf8, Float, Double Class, Fieldref, Methodref, InterfaceMethodref, String, and Long
+    // TODO: construct Float, Double, Class, Fieldref, Methodref, InterfaceMethodref, String, and Long
     Constant result;
     switch (tag) {
       case CONSTANT_Integer:
@@ -32,6 +32,7 @@ public abstract class Constant {
       case CONSTANT_Double:
       case CONSTANT_Long:
         result = new UnknownConstant(input, 8);
+        count = 2;
         break;
       case CONSTANT_MethodHandle:
         result = new UnknownConstant(input, 3);
