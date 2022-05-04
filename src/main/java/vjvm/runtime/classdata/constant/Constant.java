@@ -16,7 +16,7 @@ public abstract class Constant {
     var tag = input.readByte();
     var count = 1;
 
-    // TODO: construct Utf8, Float, Double Class, Fieldref, Methodref, InterfaceMethodref, String, and Long
+    // TODO: construct Float, Double, Class, Fieldref, Methodref, InterfaceMethodref, String, and Long
     Constant result;
     switch (tag) {
       case CONSTANT_Integer:
