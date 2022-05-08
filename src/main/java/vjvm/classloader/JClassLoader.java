@@ -9,6 +9,7 @@ import vjvm.utils.UnimplementedError;
 import vjvm.vm.VMContext;
 
 import java.io.Closeable;
+import java.io.DataInputStream;
 import java.util.HashMap;
 
 public class JClassLoader implements Closeable {
@@ -32,10 +33,30 @@ public class JClassLoader implements Closeable {
      * Otherwise, return null.
      */
     public JClass loadClass(String descriptor) {
-        throw new UnimplementedError("TODO: load class");
 
-        // To construct a JClass, use the following constructor
-        // return new JClass(new DataInputStream(istream_from_file), this);
+        // 如果已经获取就直接返回
+        JClass defined = definedClass.get(descriptor);
+        if (defined != null) {
+            return defined;
+        }
+
+        // 使用 parent 加载 class 如果 parent 不为 null
+        if (parent != null) {
+            JClass parentResult = parent.loadClass(descriptor);
+            if (parentResult != null) {
+                return parentResult;
+            }
+        }
+
+        // 依次尝试使用各个 ClassSearchPath 加载类
+        for (ClassSearchPath searchPath : searchPaths) {
+            var result = searchPath.findClass(descriptor);
+            if (result != null) {
+                return new JClass(new DataInputStream(result), this);
+            }
+        }
+
+        return null;
     }
 
     @Override
