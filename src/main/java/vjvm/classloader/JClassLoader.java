@@ -52,7 +52,9 @@ public class JClassLoader implements Closeable {
         for (ClassSearchPath searchPath : searchPaths) {
             var result = searchPath.findClass(descriptor);
             if (result != null) {
-                return new JClass(new DataInputStream(result), this);
+                JClass clazz = new JClass(new DataInputStream(result), this);
+                definedClass.put(descriptor, clazz);  // 缓存结果
+                return clazz;
             }
         }
 
