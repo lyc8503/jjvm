@@ -11,19 +11,19 @@ import java.io.InputStream;
  * If a subclass doesn't hold any resources, then just do nothing.
  */
 public abstract class ClassSearchPath implements Closeable {
-  /**
-   * Construct search path objects with a given path.
-   */
-  public static ClassSearchPath[] constructSearchPath(String path) {
-    String sep = System.getProperty("path.separator");
-    throw new UnimplementedError("TODO: parse path and return an array of search paths");
-  }
+    /**
+     * Construct search path objects with a given path.
+     */
+    public static ClassSearchPath[] constructSearchPath(String path) {
+        String sep = System.getProperty("path.separator");
+        throw new UnimplementedError("TODO: parse path and return an array of search paths");
+    }
 
-  /**
-   * Find a class with specified name.
-   *
-   * @param name name of the class to find.
-   * @return Returns a stream containing the binary data if such class is found, or null if not.
-   */
-  public abstract InputStream findClass(String name);
+    /**
+     * Find a class with specified name.
+     *
+     * @param name name of the class to find.
+     * @return Returns a stream containing the binary data if such class is found, or null if not.
+     */
+    public abstract InputStream findClass(String name);
 }
