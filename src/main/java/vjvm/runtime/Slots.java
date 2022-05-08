@@ -5,22 +5,20 @@ import java.nio.ByteBuffer;
 import vjvm.utils.UnimplementedError;
 
 /**
- * Slots represents an array of JVM slots as defined in the specification.
- * It supports getting and putting primitive data types, including address.
+ * Slots represents an array of JVM slots as defined in the specification. It
+ * supports getting and putting primitive data types, including address.
  */
 public class Slots {
-  private final ByteBuffer buf;
-
   public Slots(int slotSize) {
-    buf = ByteBuffer.allocate(slotSize * 4);
+    throw new UnimplementedError("TODO: initialize data structures");
   }
 
   public int int_(int index) {
-    return buf.getInt(index * 4);
+    throw new UnimplementedError("TODO: return the int at index");
   }
 
   public void int_(int index, int value) {
-    buf.putInt(index * 4, value);
+    throw new UnimplementedError("TODO: set the int at index");
   }
 
   public long long_(int index) {
@@ -48,19 +46,19 @@ public class Slots {
   }
 
   public int address(int index) {
-    return buf.getInt(index * 4);
+    throw new UnimplementedError("TODO: return the address at index");
   }
 
   public void address(int index, int value) {
-    buf.putInt(index, value);
+    throw new UnimplementedError("TODO: set the address at index");
   }
 
   public byte byte_(int index) {
-    return (byte)int_(index);
+    throw new UnimplementedError("TODO: return the byte at index");
   }
 
   public void byte_(int index, byte value) {
-    int_(index, value);
+    throw new UnimplementedError("TODO: set the byte at index");
   }
 
   public char char_(int index) {
@@ -79,17 +77,15 @@ public class Slots {
     throw new UnimplementedError("TODO: set the short at index");
   }
 
+  public Object value(int index) {
+    throw new UnimplementedError("TODO: return the value at index, or null if there is no value stored at index");
+  }
+
   public int size() {
-    return buf.limit() / 4;
+    throw new UnimplementedError("TODO: return the size in the number of slots");
   }
 
   public void copyTo(int begin, int length, Slots dest, int destBegin) {
-    if (dest == this && destBegin > begin)
-      for (int i = length - 1; i >= 0; --i)
-        dest.int_(destBegin + i, int_(begin + i));
-    else
-      for (int i = 0; i < length; ++i) {
-        dest.int_(destBegin + i, int_(begin + i));
-      }
+    throw new UnimplementedError("TODO: copy from this:[begin, begin+length) to dest:[destBegin,destBegin+length)");
   }
 }

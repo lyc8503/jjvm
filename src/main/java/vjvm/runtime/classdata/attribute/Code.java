@@ -14,7 +14,7 @@ import java.io.DataInput;
 public class Code extends Attribute {
   private final int maxStack;
   private final int maxLocals;
-  private final byte[] code;
+  private final byte[] code; // the bytecode represented as raw bytes
   private final Attribute[] attributes;
 
   @SneakyThrows

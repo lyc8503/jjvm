@@ -1,6 +1,7 @@
 package vjvm.runtime;
 
 import lombok.var;
+import vjvm.utils.UnimplementedError;
 import lombok.Getter;
 
 public class OperandStack {
@@ -11,89 +12,82 @@ public class OperandStack {
   private int top;
 
   public OperandStack(int stackSize) {
-    slots = new Slots(stackSize);
-    top = 0;
+    throw new UnimplementedError("TODO: initialize data structures");
   }
 
   public void pushInt(int value) {
-    slots.int_(top++, value);
+    throw new UnimplementedError("TODO: push value");
   }
 
   public int popInt() {
-    return slots.int_(--top);
+    throw new UnimplementedError("TODO: pop value");
   }
 
   public void pushFloat(float value) {
-    slots.float_(top++, value);
+    throw new UnimplementedError("TODO: push value");
   }
 
   public float popFloat() {
-    return slots.float_(--top);
+    throw new UnimplementedError("TODO: pop value");
   }
 
   public void pushLong(long value) {
-    slots.long_(top, value);
-    top += 2;
+    throw new UnimplementedError("TODO: push value");
   }
 
   public long popLong() {
-    top -= 2;
-    return slots.long_(top);
+    throw new UnimplementedError("TODO: pop value");
   }
 
   public void pushDouble(double value) {
-    slots.double_(top, value);
-    top += 2;
+    throw new UnimplementedError("TODO: push value");
   }
 
   public double popDouble() {
-    top -= 2;
-    return slots.double_(top);
+    throw new UnimplementedError("TODO: pop value");
   }
 
   public void pushAddress(int value) {
-    pushInt(value);
+    throw new UnimplementedError("TODO: push value");
   }
 
   public int popAddress() {
-    return popInt();
+    throw new UnimplementedError("TODO: pop value");
   }
 
   public void pushByte(byte value) {
-    slots.byte_(top++, value);
+    throw new UnimplementedError("TODO: push value");
   }
 
   public byte popByte() {
-    return slots.byte_(--top);
+    throw new UnimplementedError("TODO: pop value");
   }
 
   public void pushChar(char value) {
-    slots.char_(top++, value);
+    throw new UnimplementedError("TODO: push value");
   }
 
   public char popChar() {
-    return slots.char_(--top);
+    throw new UnimplementedError("TODO: pop value");
   }
 
   public void pushShort(short value) {
-    slots.short_(top++, value);
+    throw new UnimplementedError("TODO: push value");
   }
 
   public short popShort() {
-    return slots.short_(--top);
+    throw new UnimplementedError("TODO: pop value");
+  }
+
+  public void pushSlots(Slots slots) {
+    throw new UnimplementedError("TODO: push value");
   }
 
   public Slots popSlots(int count) {
-    assert top >= count;
-
-    var ret = new Slots(count);
-    top -= count;
-    slots.copyTo(top, count, ret, 0);
-
-    return ret;
+    throw new UnimplementedError("TODO: pop value");
   }
 
   public void clear() {
-    top = 0;
+    throw new UnimplementedError("TODO: pop all slots");
   }
 }

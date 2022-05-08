@@ -1,7 +1,6 @@
 package vjvm.runtime;
 
 import lombok.Getter;
-import vjvm.utils.UnimplementedError;
 import vjvm.vm.VMContext;
 
 import java.util.ArrayList;
@@ -21,15 +20,15 @@ public class JThread {
   }
 
   public JFrame top() {
-    throw new UnimplementedError("TODO: return the top frame");
+    return empty() ? null : frames.get(frames.size() - 1);
   }
 
   public void pop() {
-    throw new UnimplementedError("TODO: pop a frame");
+    frames.remove(frames.size() - 1);
   }
 
   public void push(JFrame frame) {
-    throw new UnimplementedError("TODO: push a frame");
+    frames.add(frame);
   }
 
   // Return the active pc, which is owned by the top-most frame
