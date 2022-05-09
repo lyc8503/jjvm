@@ -28,6 +28,8 @@ public class JClass {
     private final ConstantPool constantPool;
     @Getter
     private final int accessFlags;
+
+    private final int[] interfaces;
     private final FieldInfo[] fields;
     private final MethodInfo[] methods;
     private final Attribute[] attributes;
@@ -63,10 +65,31 @@ public class JClass {
         thisClass = ((ClassInfoConstant) (constantPool.constant(thisIndex))).name();
         superClass = ((ClassInfoConstant) (constantPool.constant(superIndex))).name();
 
-        fields = null;
-        methods = null;
-        attributes = null;
 
+        int interfacesCount = dataInput.readUnsignedShort();
+        interfaces = new int[interfacesCount];
+
+        for (int i = 0; i < interfacesCount; i++) {
+            interfaces[i] = dataInput.readUnsignedShort();
+        }
+
+        int fieldsCount = dataInput.readUnsignedShort();
+        fields = new FieldInfo[fieldsCount];
+        for (int i = 0; i < fieldsCount; i++) {
+            fields[i] = new FieldInfo(dataInput, this);
+        }
+
+        int methodsCount = dataInput.readUnsignedShort();
+        methods = new MethodInfo[methodsCount];
+        for (int i = 0; i < methodsCount; i++) {
+            methods[i] = new MethodInfo(dataInput, this);
+        }
+
+        int attributesCount = dataInput.readUnsignedShort();
+        attributes = new Attribute[attributesCount];
+        for (int i = 0; i < attributesCount; i++) {
+            attributes[i] = Attribute.constructFromData(dataInput, constantPool);
+        }
 
 //        throw new UnimplementedError(
 //            "TODO: you need to construct thisClass, superClass, interfaces, fields, "
@@ -108,6 +131,14 @@ public class JClass {
 
     public boolean module() {
         return (accessFlags & ACC_MODULE) != 0;
+    }
+
+    public int interfacesCount() {
+        return interfaces.length;
+    }
+
+    public String interfaceName (int index) {
+        return ((ClassInfoConstant) constantPool.constant(interfaces[index])).name();
     }
 
     public int fieldsCount() {

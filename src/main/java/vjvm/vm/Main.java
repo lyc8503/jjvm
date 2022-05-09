@@ -97,6 +97,20 @@ class Dump implements Callable<Integer> {
             }
         }
 
+        System.out.println("interfaces: ");
+        for (int i = 0; i < clazz.interfacesCount(); i++) {
+            System.out.println(clazz.interfaceName(i));
+        }
+
+        System.out.println("fields: ");
+        for (int i = 0; i < clazz.fieldsCount(); i++) {
+            System.out.println(clazz.field(i).toString());
+        }
+
+        System.out.println("methods: ");
+        for (int i = 0; i < clazz.methodsCount(); i++) {
+            System.out.println(clazz.method(i).toString());
+        }
 
 //        throw new UnimplementedError("TODO: dump clazz in lab 1.2; remove this for 1.1");
     }
