@@ -4,6 +4,7 @@ import lombok.var;
 import picocli.CommandLine;
 import vjvm.classfiledefs.Descriptors;
 import vjvm.runtime.JClass;
+import vjvm.runtime.classdata.constant.Constant;
 import vjvm.utils.UnimplementedError;
 
 import java.util.concurrent.Callable;
@@ -77,6 +78,26 @@ class Dump implements Callable<Integer> {
     }
 
     private void dump(JClass clazz) {
+        System.out.println(("class name: " + clazz.thisClass()));
+
+        System.out.println(("minor version: " + clazz.minorVersion()));
+        System.out.println(("major version: " + clazz.majorVersion()));
+
+        System.out.printf("flags: 0x%x", clazz.accessFlags());
+        System.out.println();
+
+        System.out.println("this class: " + clazz.thisClass());
+        System.out.println(("super class: " + clazz.superClass()));
+
+        System.out.println("constant pool: ");
+        for (int i = 1; i < clazz.constantPool().size(); i++) {
+            if (clazz.constantPool().constant(i) != null) {
+                System.out.printf("#%d = %s", i, clazz.constantPool().constant(i).toString());
+                System.out.println();
+            }
+        }
+
+
 //        throw new UnimplementedError("TODO: dump clazz in lab 1.2; remove this for 1.1");
     }
 }

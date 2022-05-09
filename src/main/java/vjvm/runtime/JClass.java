@@ -8,6 +8,8 @@ import vjvm.runtime.classdata.ConstantPool;
 import vjvm.runtime.classdata.FieldInfo;
 import vjvm.runtime.classdata.MethodInfo;
 import vjvm.runtime.classdata.attribute.Attribute;
+import vjvm.runtime.classdata.constant.ClassInfoConstant;
+import vjvm.runtime.classdata.constant.UTF8Constant;
 import vjvm.utils.UnimplementedError;
 
 import java.io.DataInput;
@@ -30,6 +32,14 @@ public class JClass {
     private final MethodInfo[] methods;
     private final Attribute[] attributes;
 
+    @Getter
+    private final String thisClass;
+
+    @Getter
+    private final String superClass;
+
+
+
     @SneakyThrows
     public JClass(DataInput dataInput, JClassLoader classLoader) {
         this.classLoader = classLoader;
@@ -47,9 +57,17 @@ public class JClass {
         constantPool = new ConstantPool(dataInput, this);
         accessFlags = dataInput.readUnsignedShort();
 
+        int thisIndex = dataInput.readUnsignedShort();
+        int superIndex = dataInput.readUnsignedShort();
+
+        thisClass = ((ClassInfoConstant) (constantPool.constant(thisIndex))).name();
+        superClass = ((ClassInfoConstant) (constantPool.constant(superIndex))).name();
+
         fields = null;
         methods = null;
         attributes = null;
+
+
 //        throw new UnimplementedError(
 //            "TODO: you need to construct thisClass, superClass, interfaces, fields, "
 //                + "methods, and attributes from dataInput in lab 1.2; remove this for lab 1.1."

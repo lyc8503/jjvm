@@ -32,7 +32,7 @@ public abstract class ClassSearchPath implements Closeable {
                         JarFile jarFile = new JarFile(s);
                         stream = jarFile.getInputStream(new ZipEntry(name.substring(1).replace(";", "") + ".class"));
                     } catch (Exception e) {
-                        e.printStackTrace();
+//                        e.printStackTrace();
                     }
                 } else {
                     // 在目录下查找

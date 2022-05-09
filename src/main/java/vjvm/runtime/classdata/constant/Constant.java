@@ -29,6 +29,9 @@ public abstract class Constant {
                 break;
             }
             case CONSTANT_Double:
+                result = new DoubleConstant(input);
+                count = 2;
+                break;
             case CONSTANT_Long:
                 result = new UnknownConstant(input, 8);
                 count = 2;
@@ -37,11 +40,16 @@ public abstract class Constant {
                 result = new UnknownConstant(input, 3);
                 break;
             case CONSTANT_String:
+
             case CONSTANT_Class:
+                result = new ClassInfoConstant(input, jClass);
+                break;
             case CONSTANT_MethodType:
                 result = new UnknownConstant(input, 2);
                 break;
             case CONSTANT_Float:
+                result = new FloatConstant(input);
+                break;
             case CONSTANT_Fieldref:
             case CONSTANT_Methodref:
             case CONSTANT_InterfaceMethodref:

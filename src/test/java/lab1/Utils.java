@@ -39,6 +39,9 @@ public class Utils {
             expectedLine = readNonBlankLine(expectedReader);
             actualLine = readNonBlankLine(actualReader);
 
+            System.err.println("Expected: " + expectedLine);
+            System.err.println("Actual: " + actualLine);
+
             assertTrue(expectedLine != null || actualLine == null, "Excessive output");
             assertTrue(expectedLine == null || actualLine != null, "Missing output");
 
