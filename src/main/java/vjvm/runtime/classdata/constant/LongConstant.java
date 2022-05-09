@@ -5,18 +5,18 @@ import lombok.SneakyThrows;
 
 import java.io.DataInput;
 
-public class FloatConstant extends Constant {
+public class LongConstant extends Constant {
 
     @Getter
-    private final float value;
+    private final long value;
 
     @SneakyThrows
-    public FloatConstant(DataInput input) {
-        this.value = input.readFloat();
+    public LongConstant(DataInput input) {
+        value = input.readLong();
     }
 
     @Override
     public String toString() {
-        return String.format("Float: %a", value);
+        return String.format("Long: %d", value);
     }
 }
