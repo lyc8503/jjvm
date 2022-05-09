@@ -4,6 +4,7 @@ import lombok.var;
 import vjvm.runtime.JThread;
 import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
+import vjvm.utils.UnimplementedInstructionError;
 
 import java.util.function.BiFunction;
 
@@ -78,9 +79,10 @@ public abstract class Instruction {
   );
 
   public static Instruction decode(ProgramCounter pc, MethodInfo method) {
-    var opcode = Byte.toUnsignedInt(pc.byte_());
-    if (decodeTable[opcode] == null)
-      throw new Error(String.format("Unimplemented: %d", opcode));
+    var opcode = pc.ubyte();
+    if (decodeTable[opcode] == null) {
+      throw new UnimplementedInstructionError(opcode);
+    }
 
     return decodeTable[opcode].apply(pc, method);
   }

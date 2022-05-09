@@ -26,9 +26,6 @@ public class JInterpreter {
   // (ClassName, MethodName, MethodDescriptor) -> HackFunction
   private static final HashMap<Triple<String, String, String>, BiFunction<JThread, Slots, Object>> nativeTable = new HashMap<>();
 
-  static {
-  }
-
   @Getter
   private Status status = Status.CONTINUE;
   private long steps;
@@ -169,4 +166,8 @@ public class JInterpreter {
   public static enum Status {
     CONTINUE, STEP, BREAK,
   }
+
+  static {
+  }
+
 }
