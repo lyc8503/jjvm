@@ -1,8 +1,6 @@
 package vjvm.classfiledefs;
 
-/**
- * Spec. Table 4.3-A. Interpretation of field descriptors
- */
+import lombok.var;
 public class Descriptors {
   public static final char DESC_byte = 'B';
   public static final char DESC_char = 'C';
@@ -16,9 +14,25 @@ public class Descriptors {
   public static final char DESC_array = '[';
   public static final char DESC_void = 'V';
 
-  /*
-   * Get the descriptor of a type
+  /**
+   * Get the size (in slots) of a type.
    */
+  public static int size(String descriptor) {
+    return size(descriptor.charAt(0));
+  }
+
+  public static int size(char c) {
+    return (c == DESC_double || c == DESC_long) ? 2 : 1;
+  }
+
+  public static boolean reference(String descriptor) {
+    return reference(descriptor.charAt(0));
+  }
+
+  public static boolean reference(char c) {
+    return c == DESC_reference || c == DESC_array;
+  }
+
   public static String of(String name) {
     switch (name) {
       case "boolean":

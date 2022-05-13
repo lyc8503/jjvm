@@ -3,22 +3,17 @@ package vjvm.interpreter;
 import lombok.Getter;
 import lombok.var;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
-import vjvm.classfiledefs.Opcodes;
-import vjvm.interpreter.instruction.Instruction;
+import vjvm.classfiledefs.MethodDescriptors;
+import vjvm.interpreter.instruction.Decoder;
 import vjvm.runtime.JFrame;
 import vjvm.runtime.JThread;
-import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.Slots;
 import vjvm.runtime.classdata.MethodInfo;
+import vjvm.utils.InputUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiFunction;
-import java.util.stream.Collectors;
 
 import static vjvm.classfiledefs.Descriptors.*;
 
@@ -30,8 +25,7 @@ public class JInterpreter {
   private Status status = Status.CONTINUE;
   private long steps;
 
-  private final ArrayList<Triple<MethodInfo, Integer, byte[]>> breakpoints = new ArrayList<>();
-  private Triple<MethodInfo, Integer, byte[]> currentBreakpoint;
+  private final ArrayList<Breakpoint> breakpoints = new ArrayList<>();
 
   /**
    * Invoke a method when there is no frames in a thread.
@@ -67,48 +61,15 @@ public class JInterpreter {
   }
 
   public void setBreakpoint(MethodInfo method, int offset) {
-    var code = method.code().code();
-    var opcode = code[offset];
-
-    if (opcode == Opcodes.OPC_breakpoint) {
-      return;
-    }
-
-    var pc = new ProgramCounter(code);
-    pc.position(offset);
-    Instruction.decode(pc, method);
-    var end = pc.position();
-
-    breakpoints.add(Triple.of(method, offset, Arrays.copyOfRange(code, offset, end)));
-    Arrays.fill(code, offset, end, Opcodes.OPC_breakpoint);
+    // TODO(optional): add and enable a breakpoint
   }
 
   public void removeBreakpoint(int index) {
-    disableBreakpoint(breakpoints.get(index));
-    breakpoints.remove(index);
+    // TODO(optional): disable and remove the breakpoint at breakpoints[index]
   }
 
-  public List<Pair<MethodInfo, Integer>> breakpoints() {
-    return breakpoints.stream().map(t -> Pair.of(t.getLeft(), t.getMiddle())).collect(Collectors.toList());
-  }
-
-  private void disableBreakpoint(Triple<MethodInfo, Integer, byte[]> bp) {
-    var code = bp.getLeft().code().code();
-    var instr = bp.getRight();
-    System.arraycopy(instr, 0, code, bp.getMiddle(), instr.length);
-  }
-
-  private void findCurrentBreakpoint(JThread thread) {
-    var method = thread.top().method();
-    var offset = thread.pc().position();
-
-    var bp = breakpoints.stream().filter(t -> t.getLeft().equals(method) && t.getMiddle().equals(offset)).findFirst();
-
-    if (!bp.isPresent()) {
-      throw new Error("no breakpoint found");
-    }
-
-    currentBreakpoint = bp.get();
+  public List<Breakpoint> breakpoints() {
+    return Collections.unmodifiableList(breakpoints);
   }
 
   private void run(JThread thread) {
@@ -120,20 +81,11 @@ public class JInterpreter {
         monitor.enter(thread);
       }
 
-      var op = Instruction.decode(thread.pc(), frame.method());
+      var op = Decoder.decode(thread.pc(), frame.method());
       steps--;
       op.run(thread);
 
-      if (currentBreakpoint != null) {
-        disableBreakpoint(currentBreakpoint);
-        currentBreakpoint = null;
-      }
-
-      if (status == Status.BREAK) {
-        findCurrentBreakpoint(thread);
-        disableBreakpoint(currentBreakpoint);
-        monitor.enter(thread);
-      }
+      // TODO(optional): handle breakpoints
     }
   }
 
@@ -152,11 +104,36 @@ public class JInterpreter {
     thread.pop();
     var s = thread.top().stack();
 
-    switch (method.descriptor().charAt(method.descriptor().indexOf(')') + 1)) {
-    case 'V':
+    switch (MethodDescriptors.returnType(method.descriptor())) {
+    case DESC_void:
+      break;
+    case DESC_array:
+    case DESC_reference:
+      s.pushAddress((Integer) ret);
+      break;
+    case DESC_boolean:
+      s.pushInt(((Boolean) ret) ? 1 : 0);
+      break;
+    case DESC_byte:
+      s.pushInt((Byte) ret);
+      break;
+    case DESC_char:
+      s.pushInt((Character) ret);
+      break;
+    case DESC_double:
+      s.pushDouble((Double) ret);
+      break;
+    case DESC_float:
+      s.pushFloat((Float) ret);
       break;
     case DESC_int:
       s.pushInt((Integer) ret);
+      break;
+    case DESC_long:
+      s.pushLong((Long) ret);
+      break;
+    case DESC_short:
+      s.pushInt((Short) ret);
       break;
     default:
       throw new Error("Invalid return type");
@@ -168,6 +145,28 @@ public class JInterpreter {
   }
 
   static {
+    nativeTable.put(Triple.of("lab2/IOUtil", "readInt", "()I"), (t, a) -> InputUtils.readInt());
+    nativeTable.put(Triple.of("lab2/IOUtil", "readLong", "()J"), (t, a) -> InputUtils.readLong());
+    nativeTable.put(Triple.of("lab2/IOUtil", "readChar", "()C"), (t, a) -> InputUtils.readChar());
+    nativeTable.put(Triple.of("lab2/IOUtil", "writeInt", "(I)V"), (t, a) -> {
+      System.out.println(a.int_(0));
+      return null;
+    });
+    nativeTable.put(Triple.of("lab2/IOUtil", "writeFloat", "(F)V"), (t, a) -> {
+      System.out.println(a.float_(0));
+      return null;
+    });
+    nativeTable.put(Triple.of("lab2/IOUtil", "writeLong", "(J)V"), (t, a) -> {
+      System.out.println(a.long_(0));
+      return null;
+    });
+    nativeTable.put(Triple.of("lab2/IOUtil", "writeDouble", "(D)V"), (t, a) -> {
+      System.out.println(a.double_(0));
+      return null;
+    });
+    nativeTable.put(Triple.of("lab2/IOUtil", "writeChar", "(C)V"), (t, a) -> {
+      System.out.println(a.char_(0));
+      return null;
+    });
   }
-
 }

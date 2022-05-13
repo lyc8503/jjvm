@@ -78,7 +78,8 @@ public class Slots {
   }
 
   public Object value(int index) {
-    throw new UnimplementedError("TODO: return the value at index, or null if there is no value stored at index");
+    // TODO(optional): return the value at index, or null if there is no value stored at index
+    return null;
   }
 
   public int size() {
