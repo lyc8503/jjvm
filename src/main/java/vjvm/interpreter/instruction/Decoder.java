@@ -3,6 +3,10 @@ package vjvm.interpreter.instruction;
 import java.util.function.BiFunction;
 
 import lombok.var;
+import vjvm.interpreter.instruction.constants.XCONST_Y;
+import vjvm.interpreter.instruction.constants.XPUSH;
+import vjvm.interpreter.instruction.references.INVOKESTATIC;
+import vjvm.interpreter.instruction.control.XRETURN;
 import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 import vjvm.utils.UnimplementedInstructionError;
@@ -26,11 +30,11 @@ public class Decoder {
 
   static final BiFunction<ProgramCounter, MethodInfo, Instruction>[] decodeTable = of(
   // @formatter:off
-      /* 0x00 */  null, null, null, null,
-      /* 0x04 */  null, null, null, null,
-      /* 0x08 */  null, null, null, null,
+      /* 0x00 */  null, null, XCONST_Y::ICONST_M1, XCONST_Y::ICONST_0,
+      /* 0x04 */  XCONST_Y::ICONST_1, XCONST_Y::ICONST_2, XCONST_Y::ICONST_3, XCONST_Y::ICONST_4,
+      /* 0x08 */  XCONST_Y::ICONST_5, null, null, null,
       /* 0x0c */  null, null, null, null,
-      /* 0x10 */  null, null, null, null,
+      /* 0x10 */  XPUSH::BIPUSH, XPUSH::SIPUSH, null, null,
       /* 0x14 */  null, null, null, null,
       /* 0x18 */  null, null, null, null,
       /* 0x1c */  null, null, null, null,
@@ -70,9 +74,9 @@ public class Decoder {
       /* 0xa4 */  null, null, null, null,
       /* 0xa8 */  null, null, null, null,
       /* 0xac */  null, null, null, null,
-      /* 0xb0 */  null, null, null, null,
+      /* 0xb0 */  null, XRETURN::RETURN, null, null,
       /* 0xb4 */  null, null, null, null,
-      /* 0xb8 */  null, null, null, null,
+      /* 0xb8 */  INVOKESTATIC::new, null, null, null,
       /* 0xbc */  null, null, null, null,
       /* 0xc0 */  null, null, null, null,
       /* 0xc4 */  null, null, null, null,
