@@ -1,6 +1,7 @@
 package vjvm.runtime;
 
 import java.nio.ByteBuffer;
+import java.util.Optional;
 
 import vjvm.utils.UnimplementedError;
 
@@ -94,9 +95,9 @@ public class Slots {
     throw new UnimplementedError();
   }
 
-  public Object value(int index) {
+  public Optional<Object> value(int index) {
     // TODO(optional): return the value at index, or null if there is no value stored at index
-    return null;
+    return Optional.empty();
   }
 
   public int size() {

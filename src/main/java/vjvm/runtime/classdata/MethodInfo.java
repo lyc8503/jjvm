@@ -2,6 +2,7 @@ package vjvm.runtime.classdata;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
+import vjvm.classfiledefs.MethodDescriptors;
 import vjvm.runtime.JClass;
 import vjvm.runtime.classdata.attribute.Attribute;
 import vjvm.runtime.classdata.attribute.Code;
@@ -30,6 +31,10 @@ public class MethodInfo {
   @SneakyThrows
   public MethodInfo(DataInput dataInput, JClass jClass) {
     throw new UnimplementedError("TODO: Get method information from constant pool");
+  }
+
+  public int argc() {
+    return MethodDescriptors.argc(descriptor);
   }
 
   public boolean public_() {

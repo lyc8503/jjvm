@@ -9,7 +9,6 @@ import vjvm.runtime.classdata.MethodInfo;
 import vjvm.utils.UnimplementedError;
 
 public class INVOKESTATIC extends Instruction {
-  private final JClass jClass;
   private final MethodInfo method;
 
   public INVOKESTATIC(ProgramCounter pc, MethodInfo method) {
@@ -19,10 +18,10 @@ public class INVOKESTATIC extends Instruction {
 
   @Override
   public void run(JThread thread) {
-    // TODO: run invokestatic
-    // 1. pop arguments from current stack
-    // 2. thread.context().interpreter().invoke(method, thread, args);
-    throw new UnimplementedError();
+    var stack = thread.top().stack();
+    var args = stack.popSlots(method.argc());
+
+    thread.context().interpreter().invoke(method, thread, args);
   }
 
   @Override

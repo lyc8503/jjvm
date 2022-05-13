@@ -6,6 +6,7 @@ import lombok.var;
 import vjvm.interpreter.instruction.constants.XCONST_Y;
 import vjvm.interpreter.instruction.constants.XPUSH;
 import vjvm.interpreter.instruction.references.INVOKESTATIC;
+import vjvm.interpreter.instruction.reserved.BREAKPOINT;
 import vjvm.interpreter.instruction.control.XRETURN;
 import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
@@ -80,7 +81,7 @@ public class Decoder {
       /* 0xbc */  null, null, null, null,
       /* 0xc0 */  null, null, null, null,
       /* 0xc4 */  null, null, null, null,
-      /* 0xc8 */  null, null, null, null,
+      /* 0xc8 */  null, null, BREAKPOINT::new, null,
       /* 0xcc */  null, null, null, null,
       /* 0xd0 */  null, null, null, null,
       /* 0xd4 */  null, null, null, null,

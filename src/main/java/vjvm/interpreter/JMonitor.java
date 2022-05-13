@@ -213,8 +213,8 @@ public class JMonitor {
       var locals = currentThread.top().vars();
       for (var i = 0; i < locals.size(); i++) {
         var value = locals.value(i);
-        if (value != null) {
-          System.err.printf("#%-4d = %s\n", i, value);
+        if (value.isPresent()) {
+          System.err.printf("#%-4d = %s\n", i, value.get());
         }
       }
 
@@ -240,8 +240,8 @@ public class JMonitor {
       var slots = stack.slots();
       for (var i = 0; i < stack.top(); i++) {
         var value = slots.value(i);
-        if (value != null) {
-          System.err.printf("#%-4d = %s\n", i, value);
+        if (value.isPresent()) {
+          System.err.printf("#%-4d = %s\n", i, value.get());
         }
       }
       return -1;
