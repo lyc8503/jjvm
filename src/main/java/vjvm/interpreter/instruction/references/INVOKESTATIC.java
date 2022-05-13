@@ -13,13 +13,16 @@ public class INVOKESTATIC extends Instruction {
   private final MethodInfo method;
 
   public INVOKESTATIC(ProgramCounter pc, MethodInfo method) {
-    throw new UnimplementedError("TODO: decode invokestatic");
+    // TODO: decode invokestatic
+    throw new UnimplementedError();
   }
 
   @Override
   public void run(JThread thread) {
-    throw new UnimplementedError("TODO: run invokestatic");
-    // thread.context().interpreter().invoke(method, thread, args);
+    // TODO: run invokestatic
+    // 1. pop arguments from current stack
+    // 2. thread.context().interpreter().invoke(method, thread, args);
+    throw new UnimplementedError();
   }
 
   @Override

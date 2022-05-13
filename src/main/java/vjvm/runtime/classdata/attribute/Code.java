@@ -19,6 +19,7 @@ public class Code extends Attribute {
 
   @SneakyThrows
   Code(DataInput input, ConstantPool constantPool) {
-    throw new UnimplementedError("Construct code");
+    // TODO: construct code
+    throw new UnimplementedError();
   }
 }

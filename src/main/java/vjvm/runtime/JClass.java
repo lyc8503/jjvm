@@ -117,6 +117,7 @@ public class JClass {
   }
 
   public String name() {
-    throw new UnimplementedError("TODO: return class name from thisClass");
+    // TODO: return class name from thisClass
+    throw new UnimplementedError();
   }
 }
