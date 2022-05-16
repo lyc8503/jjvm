@@ -53,5 +53,6 @@ jar {
 test {
   environment 'VJVM_TESTRES_PATH', "$projectDir/testdata/build/"
   environment 'VJVM_TESTRESULT_PATH', "$projectDir/testdata/dump/"
+  environment 'VJVM_TESTINPUT_PATH', "$projectDir/testdata/input/"
   useJUnitPlatform()
 }
