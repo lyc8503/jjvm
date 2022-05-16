@@ -13,6 +13,7 @@ public abstract class Attribute {
     var nameIndex = input.readUnsignedShort();
     var attrLength = Integer.toUnsignedLong(input.readInt());
 
+    // TODO: detect and construct Code attribute
     return new UnknownAttribute(input, attrLength);
   }
 }
