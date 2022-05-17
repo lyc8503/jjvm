@@ -56,16 +56,6 @@ public class OperandStack {
     throw new UnimplementedError();
   }
 
-  public void pushAddress(int value) {
-    // TODO: push value
-    throw new UnimplementedError();
-  }
-
-  public int popAddress() {
-    // TODO: pop value
-    throw new UnimplementedError();
-  }
-
   public void pushByte(byte value) {
     // TODO: push value
     throw new UnimplementedError();

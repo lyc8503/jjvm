@@ -107,10 +107,6 @@ public class JInterpreter {
     switch (MethodDescriptors.returnType(method.descriptor())) {
     case DESC_void:
       break;
-    case DESC_array:
-    case DESC_reference:
-      s.pushAddress((Integer) ret);
-      break;
     case DESC_boolean:
       s.pushInt(((Boolean) ret) ? 1 : 0);
       break;

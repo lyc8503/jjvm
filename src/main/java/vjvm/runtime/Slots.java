@@ -55,16 +55,6 @@ public class Slots {
     throw new UnimplementedError();
   }
 
-  public int address(int index) {
-    // TODO: return the address at index
-    throw new UnimplementedError();
-  }
-
-  public void address(int index, int value) {
-    // TODO: set the address at index
-    throw new UnimplementedError();
-  }
-
   public byte byte_(int index) {
     // TODO: return the byte at index
     throw new UnimplementedError();
