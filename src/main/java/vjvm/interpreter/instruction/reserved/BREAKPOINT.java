@@ -7,18 +7,18 @@ import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 
 public class BREAKPOINT extends Instruction {
-  public BREAKPOINT(ProgramCounter pc, MethodInfo method) {
-  }
+    public BREAKPOINT(ProgramCounter pc, MethodInfo method) {
+    }
 
-  @Override
-  public void run(JThread thread) {
-    var pc = thread.pc();
-    pc.position(pc.position() - 1);
-    thread.context().interpreter().break_();
-  }
+    @Override
+    public void run(JThread thread) {
+        var pc = thread.pc();
+        pc.position(pc.position() - 1);
+        thread.context().interpreter().break_();
+    }
 
-  @Override
-  public String toString() {
-    return "breakpoint";
-  }
+    @Override
+    public String toString() {
+        return "breakpoint";
+    }
 }

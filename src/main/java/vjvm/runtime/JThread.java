@@ -9,38 +9,38 @@ import java.util.List;
 
 public class JThread {
 
-  // The stack of frames
-  private final ArrayList<JFrame> frames = new ArrayList<>();
+    // The stack of frames
+    private final ArrayList<JFrame> frames = new ArrayList<>();
 
-  @Getter
-  private final VMContext context;
+    @Getter
+    private final VMContext context;
 
-  public JThread(VMContext context) {
-    this.context = context;
-  }
+    public JThread(VMContext context) {
+        this.context = context;
+    }
 
-  public JFrame top() {
-    return empty() ? null : frames.get(frames.size() - 1);
-  }
+    public JFrame top() {
+        return empty() ? null : frames.get(frames.size() - 1);
+    }
 
-  public void pop() {
-    frames.remove(frames.size() - 1);
-  }
+    public void pop() {
+        frames.remove(frames.size() - 1);
+    }
 
-  public void push(JFrame frame) {
-    frames.add(frame);
-  }
+    public void push(JFrame frame) {
+        frames.add(frame);
+    }
 
-  // Return the active pc, which is owned by the top-most frame
-  public ProgramCounter pc() {
-    return empty() ? null : top().pc();
-  }
+    // Return the active pc, which is owned by the top-most frame
+    public ProgramCounter pc() {
+        return empty() ? null : top().pc();
+    }
 
-  public boolean empty() {
-    return frames.isEmpty();
-  }
+    public boolean empty() {
+        return frames.isEmpty();
+    }
 
-  public List<JFrame> frames() {
-    return Collections.unmodifiableList(frames);
-  }
+    public List<JFrame> frames() {
+        return Collections.unmodifiableList(frames);
+    }
 }

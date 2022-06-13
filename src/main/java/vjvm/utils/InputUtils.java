@@ -8,38 +8,38 @@ import lombok.var;
  */
 public class InputUtils {
 
-  @SneakyThrows
-  public static int readInt() {
-    return (int) readLong();
-  }
-
-  @SneakyThrows
-  public static long readLong() {
-    var in = System.in;
-    long i = 0;
-    boolean negative = false;
-    int c = in.read();
-
-    while (Character.isSpaceChar(c)) {
-      c = in.read();
+    @SneakyThrows
+    public static int readInt() {
+        return (int) readLong();
     }
 
-    if (c == '-') {
-      negative = true;
-      c = '0';
+    @SneakyThrows
+    public static long readLong() {
+        var in = System.in;
+        long i = 0;
+        boolean negative = false;
+        int c = in.read();
+
+        while (Character.isSpaceChar(c)) {
+            c = in.read();
+        }
+
+        if (c == '-') {
+            negative = true;
+            c = '0';
+        }
+
+        while (Character.isDigit(c)) {
+            i *= 10;
+            i += c - '0';
+            c = in.read();
+        }
+
+        return negative ? -i : i;
     }
 
-    while (Character.isDigit(c)) {
-      i *= 10;
-      i += c - '0';
-      c = in.read();
+    @SneakyThrows
+    public static char readChar() {
+        return (char) System.in.read();
     }
-
-    return negative ? -i : i;
-  }
-
-  @SneakyThrows
-  public static char readChar() {
-    return (char) System.in.read();
-  }
 }

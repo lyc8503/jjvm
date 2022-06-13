@@ -5,7 +5,7 @@ import vjvm.runtime.JClass;
 
 import java.io.DataInput;
 
-public class MethodRefConstant extends Constant{
+public class MethodRefConstant extends Constant {
     private final JClass jClass;
     private final int classIndex;
     private final int nameAndTypeIndex;

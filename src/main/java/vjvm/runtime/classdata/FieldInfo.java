@@ -6,7 +6,6 @@ import lombok.SneakyThrows;
 import vjvm.runtime.JClass;
 import vjvm.runtime.classdata.attribute.Attribute;
 import vjvm.runtime.classdata.constant.UTF8Constant;
-import vjvm.utils.UnimplementedError;
 
 import java.io.DataInput;
 

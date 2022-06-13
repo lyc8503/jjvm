@@ -3,11 +3,10 @@ package vjvm.runtime.classdata.constant;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import vjvm.runtime.JClass;
-import vjvm.runtime.classdata.ConstantPool;
 
 import java.io.DataInput;
 
-public class ClassInfoConstant extends Constant{
+public class ClassInfoConstant extends Constant {
 
     @Getter
     private final int nameIndex;
