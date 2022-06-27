@@ -33,8 +33,8 @@ public class Decoder {
         // @formatter:off
         /* 0x00 */  null, null, XCONST_Y::ICONST_M1, XCONST_Y::ICONST_0,
         /* 0x04 */  XCONST_Y::ICONST_1, XCONST_Y::ICONST_2, XCONST_Y::ICONST_3, XCONST_Y::ICONST_4,
-        /* 0x08 */  XCONST_Y::ICONST_5, null, null, null,
-        /* 0x0c */  null, null, null, null,
+        /* 0x08 */  XCONST_Y::ICONST_5, XCONST_Y::LCONST_0, XCONST_Y::LCONST_1, XCONST_Y::FCONST_0,
+        /* 0x0c */  XCONST_Y::FCONST_1, XCONST_Y::FCONST_2, XCONST_Y::DCONST_0, XCONST_Y::DCONST_1,
         /* 0x10 */  XPUSH::BIPUSH, XPUSH::SIPUSH, null, null,
         /* 0x14 */  null, null, null, null,
         /* 0x18 */  null, null, null, null,

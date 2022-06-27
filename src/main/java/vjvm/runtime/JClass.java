@@ -95,6 +95,14 @@ public class JClass {
 //                + "Some of them are not defined; you need to define them yourself");
     }
 
+    public MethodInfo findMethod(String name, String descriptor) {
+        for (var method : methods)
+            if (method.name().equals(name) && method.descriptor().equals(descriptor))
+                return method;
+
+        return null;
+    }
+
     public boolean public_() {
         return (accessFlags & ACC_PUBLIC) != 0;
     }
@@ -156,7 +164,6 @@ public class JClass {
     }
 
     public String name() {
-        // TODO: return class name from thisClass
-        throw new UnimplementedError();
+        return thisClass;
     }
 }

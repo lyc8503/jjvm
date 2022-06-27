@@ -31,6 +31,8 @@ public class MethodInfo {
     @SneakyThrows
     public MethodInfo(DataInput dataInput, JClass jClass) {
 
+        this.jClass = jClass;
+
         accessFlags = (short) dataInput.readUnsignedShort();
         int nameIndex = dataInput.readUnsignedShort();
         name = ((UTF8Constant) jClass.constantPool().constant(nameIndex)).value();
@@ -41,6 +43,10 @@ public class MethodInfo {
         attributes = new Attribute[attributesCount];
         for (int i = 0; i < attributes.length; i++) {
             attributes[i] = Attribute.constructFromData(dataInput, jClass.constantPool());
+
+            if (attributes[i] instanceof Code) {
+                code = (Code) attributes[i];
+            }
         }
 
 //        throw new UnimplementedError("TODO: Get method information from constant pool");

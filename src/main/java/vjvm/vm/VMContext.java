@@ -8,6 +8,7 @@ import vjvm.classloader.searchpath.ModuleSearchPath;
 import vjvm.interpreter.JInterpreter;
 import vjvm.interpreter.JMonitor;
 import vjvm.runtime.JThread;
+import vjvm.runtime.Slots;
 
 import java.util.ArrayList;
 
@@ -45,9 +46,9 @@ public class VMContext {
 
         var entry = userLoader.loadClass('L' + entryClass.replace('.', '/') + ';');
 
-//    var mainMethod = entry.findMethod("main", "([Ljava/lang/String;)V");
-//    assert mainMethod.jClass() == entry;
-//    interpreter.invoke(mainMethod, initThread, new Slots(1));
+        var mainMethod = entry.findMethod("main", "([Ljava/lang/String;)V");
+        assert mainMethod.jClass() == entry;
+        interpreter.invoke(mainMethod, initThread, new Slots(1));
     }
 
     private static ClassSearchPath[] getSystemSearchPaths() {

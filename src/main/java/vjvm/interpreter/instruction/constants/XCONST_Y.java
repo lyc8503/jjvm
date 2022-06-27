@@ -18,31 +18,54 @@ public class XCONST_Y<T> extends Instruction {
     private String name;
 
     public static final XCONST_Y<Integer> ICONST_M1(ProgramCounter pc, MethodInfo method) {
-        return new XCONST_Y<Integer>(-1, OperandStack::pushInt, "iconst_m1");
+        return new XCONST_Y<>(-1, OperandStack::pushInt, "iconst_m1");
     }
 
     public static final XCONST_Y<Integer> ICONST_0(ProgramCounter pc, MethodInfo method) {
-        return new XCONST_Y<Integer>(0, OperandStack::pushInt, "iconst_0");
+        return new XCONST_Y<>(0, OperandStack::pushInt, "iconst_0");
     }
 
     public static final XCONST_Y<Integer> ICONST_1(ProgramCounter pc, MethodInfo method) {
-        return new XCONST_Y<Integer>(-1, OperandStack::pushInt, "iconst_1");
+        return new XCONST_Y<>(1, OperandStack::pushInt, "iconst_1");
     }
 
     public static final XCONST_Y<Integer> ICONST_2(ProgramCounter pc, MethodInfo method) {
-        return new XCONST_Y<Integer>(2, OperandStack::pushInt, "iconst_2");
+        return new XCONST_Y<>(2, OperandStack::pushInt, "iconst_2");
     }
 
     public static final XCONST_Y<Integer> ICONST_3(ProgramCounter pc, MethodInfo method) {
-        return new XCONST_Y<Integer>(3, OperandStack::pushInt, "iconst_3");
+        return new XCONST_Y<>(3, OperandStack::pushInt, "iconst_3");
     }
 
     public static final XCONST_Y<Integer> ICONST_4(ProgramCounter pc, MethodInfo method) {
-        return new XCONST_Y<Integer>(4, OperandStack::pushInt, "iconst_4");
+        return new XCONST_Y<>(4, OperandStack::pushInt, "iconst_4");
     }
 
     public static final XCONST_Y<Integer> ICONST_5(ProgramCounter pc, MethodInfo method) {
-        return new XCONST_Y<Integer>(5, OperandStack::pushInt, "iconst_5");
+        return new XCONST_Y<>(5, OperandStack::pushInt, "iconst_5");
+    }
+
+    public static final XCONST_Y<Long> LCONST_0(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<>(0L, OperandStack::pushLong, "lconst_0");
+    }
+
+    public static final XCONST_Y<Long> LCONST_1(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<>(1L, OperandStack::pushLong, "lconst_1");
+    }
+    public static final XCONST_Y<Float> FCONST_0(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<>(0.0f, OperandStack::pushFloat, "lconst_0");
+    }
+    public static final XCONST_Y<Float> FCONST_1(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<>(1.0f, OperandStack::pushFloat, "fconst_1");
+    }
+    public static final XCONST_Y<Float> FCONST_2(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<>(2.0f, OperandStack::pushFloat, "fconst_2");
+    }
+    public static final XCONST_Y<Double> DCONST_0(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<>(0.0d, OperandStack::pushDouble, "dconst_0");
+    }
+    public static final XCONST_Y<Double> DCONST_1(ProgramCounter pc, MethodInfo method) {
+        return new XCONST_Y<>(1.0d, OperandStack::pushDouble, "dconst_1");
     }
 
     @Override

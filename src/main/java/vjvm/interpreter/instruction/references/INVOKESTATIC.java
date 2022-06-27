@@ -2,17 +2,21 @@ package vjvm.interpreter.instruction.references;
 
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
+import vjvm.runtime.JClass;
 import vjvm.runtime.JThread;
 import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
+import vjvm.runtime.classdata.constant.MethodRefConstant;
 import vjvm.utils.UnimplementedError;
 
 public class INVOKESTATIC extends Instruction {
     private final MethodInfo method;
 
     public INVOKESTATIC(ProgramCounter pc, MethodInfo method) {
-        // TODO: decode invokestatic
-        throw new UnimplementedError();
+        MethodRefConstant methodRef = (MethodRefConstant) method.jClass().constantPool().constant(pc.ushort());
+
+        JClass clazz = method.jClass().classLoader().loadClass("L" + methodRef.classInfo().name() + ";");
+        this.method = clazz.findMethod(methodRef.nameAndType().name(), methodRef.nameAndType().type());
     }
 
     @Override
