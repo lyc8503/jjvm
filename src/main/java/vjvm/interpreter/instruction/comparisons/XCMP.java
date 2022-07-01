@@ -43,8 +43,8 @@ public class XCMP<T extends Number> extends Instruction {
     @Override
     public void run(JThread thread) {
         var stack = thread.top().stack();
-        T value1 = popFunc.apply(stack);
         T value2 = popFunc.apply(stack);
+        T value1 = popFunc.apply(stack);
 
         if (Double.isNaN(value1.doubleValue()) || Double.isNaN(value2.doubleValue())) {
             if (true4NaN) {

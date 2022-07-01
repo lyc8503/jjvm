@@ -7,7 +7,6 @@ import vjvm.runtime.JThread;
 import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 import vjvm.runtime.classdata.constant.MethodRefConstant;
-import vjvm.utils.UnimplementedError;
 
 public class INVOKESTATIC extends Instruction {
     private final MethodInfo method;

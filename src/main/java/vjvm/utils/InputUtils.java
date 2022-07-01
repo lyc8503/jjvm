@@ -20,7 +20,7 @@ public class InputUtils {
         boolean negative = false;
         int c = in.read();
 
-        while (Character.isSpaceChar(c)) {
+        while (Character.isSpaceChar(c) || c == 10) {
             c = in.read();
         }
 
@@ -35,11 +35,20 @@ public class InputUtils {
             c = in.read();
         }
 
+        System.err.println("IOUtil readLong: " + (negative ? -i : i));
+
         return negative ? -i : i;
     }
 
     @SneakyThrows
     public static char readChar() {
-        return (char) System.in.read();
+        var in = System.in;
+
+        int c = in.read();
+        while (Character.isSpaceChar(c) || c == 10) {
+            c = in.read();
+        }
+
+        return (char) c;
     }
 }

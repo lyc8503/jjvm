@@ -20,34 +20,34 @@ public class IF_ICMP extends Instruction {
 
 
     public static IF_ICMP IF_ICMPEQ(ProgramCounter pc, MethodInfo method) {
-        return new IF_ICMP(pc.ushort(), Condition.EQ, pc, "if_icmpeq");
+        return new IF_ICMP(pc.short_(), Condition.EQ, pc, "if_icmpeq");
     }
 
     public static IF_ICMP IF_ICMPNE(ProgramCounter pc, MethodInfo method) {
-        return new IF_ICMP(pc.ushort(), Condition.NE, pc, "if_icmpne");
+        return new IF_ICMP(pc.short_(), Condition.NE, pc, "if_icmpne");
     }
 
     public static IF_ICMP IF_ICMPLT(ProgramCounter pc, MethodInfo method) {
-        return new IF_ICMP(pc.ushort(), Condition.LT, pc, "if_icmplt");
+        return new IF_ICMP(pc.short_(), Condition.LT, pc, "if_icmplt");
     }
 
     public static IF_ICMP IF_ICMPGE(ProgramCounter pc, MethodInfo method) {
-        return new IF_ICMP(pc.ushort(), Condition.GE, pc, "if_icmpge");
+        return new IF_ICMP(pc.short_(), Condition.GE, pc, "if_icmpge");
     }
 
     public static IF_ICMP IF_ICMPGT(ProgramCounter pc, MethodInfo method) {
-        return new IF_ICMP(pc.ushort(), Condition.GT, pc, "if_icmpgt");
+        return new IF_ICMP(pc.short_(), Condition.GT, pc, "if_icmpgt");
     }
 
     public static IF_ICMP IF_ICMPLE(ProgramCounter pc, MethodInfo method) {
-        return new IF_ICMP(pc.ushort(), Condition.LE, pc, "if_icmple");
+        return new IF_ICMP(pc.short_(), Condition.LE, pc, "if_icmple");
     }
 
     @Override
     public void run(JThread thread) {
         var stack = thread.top().stack();
-        int value1 = stack.popInt();
         int value2 = stack.popInt();
+        int value1 = stack.popInt();
         boolean success = false;
 
         switch (condition) {
@@ -74,7 +74,10 @@ public class IF_ICMP extends Instruction {
         }
 
         if (success) {
-            pc.move(branchByte);
+            System.err.println("IF DEBUG: success, byte " + branchByte);
+            pc.move(branchByte - 3);
+        } else {
+            System.err.println("IF DEBUG: fail");
         }
     }
 

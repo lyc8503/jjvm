@@ -11,7 +11,10 @@ import vjvm.interpreter.instruction.control.GOTO;
 import vjvm.interpreter.instruction.control.XRETURN;
 import vjvm.interpreter.instruction.conversions.X2Y;
 import vjvm.interpreter.instruction.loads.XLOAD_Y;
-import vjvm.interpreter.instruction.math.*;
+import vjvm.interpreter.instruction.math.BIOP;
+import vjvm.interpreter.instruction.math.INC;
+import vjvm.interpreter.instruction.math.NEG;
+import vjvm.interpreter.instruction.math.SHX;
 import vjvm.interpreter.instruction.references.INVOKESTATIC;
 import vjvm.interpreter.instruction.reserved.BREAKPOINT;
 import vjvm.interpreter.instruction.stack.DUP;
@@ -66,21 +69,21 @@ public class Decoder {
         /* 0x54 */  null, null, null, POP::POP,
         /* 0x58 */  POP::POP2, DUP::DUP, DUP::DUP_X1, DUP::DUP_X2,
         /* 0x5c */  DUP::DUP2, DUP::DUP2_X1, DUP::DUP2_X2, SWAP::new,
-        /* 0x60 */  ADD::IADD, ADD::LADD, ADD::FADD, ADD::DADD,
-        /* 0x64 */  SUB::ISUB, SUB::LSUB, SUB::FSUB, SUB::DSUB,
-        /* 0x68 */  MUL::IMUL, MUL::LMUL, MUL::FMUL, MUL::DMUL,
-        /* 0x6c */  DIV::IDIV, DIV::LDIV, DIV::FDIV, DIV::DDIV,
-        /* 0x70 */  REM::IREM, REM::LREM, REM::FREM, REM::DREM,
+        /* 0x60 */  BIOP::IADD, BIOP::LADD, BIOP::FADD, BIOP::DADD,
+        /* 0x64 */  BIOP::ISUB, BIOP::LSUB, BIOP::FSUB, BIOP::DSUB,
+        /* 0x68 */  BIOP::IMUL, BIOP::LMUL, BIOP::FMUL, BIOP::DMUL,
+        /* 0x6c */  BIOP::IDIV, BIOP::LDIV, BIOP::FDIV, BIOP::DDIV,
+        /* 0x70 */  BIOP::IREM, BIOP::LREM, BIOP::FREM, BIOP::DREM,
         /* 0x74 */  NEG::INEG, NEG::LNEG, NEG::FNEG, NEG::DNEG,
-        /* 0x78 */  SHL::ISHL, SHL::LSHL, SHR::ISHR, SHR::LSHR,
-        /* 0x7c */  USHR::IUSHR, USHR::LUSHR, AND::IAND, AND::LAND,
-        /* 0x80 */  OR::IOR, OR::LOR, XOR::IXOR, XOR::LXOR,
+        /* 0x78 */  SHX::ISHL, SHX::LSHL, SHX::ISHR, SHX::LSHR,
+        /* 0x7c */  SHX::IUSHR, SHX::LUSHR, BIOP::IAND, BIOP::LAND,
+        /* 0x80 */  BIOP::IOR, BIOP::LOR, BIOP::IXOR, BIOP::LXOR,
         /* 0x84 */  INC::IINC, X2Y::I2L, X2Y::I2F, X2Y::I2D,
         /* 0x88 */  X2Y::L2I, X2Y::L2F, X2Y::L2D, X2Y::F2I,
         /* 0x8c */  X2Y::F2L, X2Y::F2D, X2Y::D2I, X2Y::D2L,
         /* 0x90 */  X2Y::D2F, X2Y::I2B, X2Y::I2C, X2Y::I2S,
         /* 0x94 */  XCMP::LCMP, XCMP::FCMPL, XCMP::FCMPG, XCMP::DCMPL,
-        /* 0x98 */  XCMP::FCMPG, IF::IFEQ, IF::IFNE, IF::IFLT,
+        /* 0x98 */  XCMP::DCMPG, IF::IFEQ, IF::IFNE, IF::IFLT,
         /* 0x9c */  IF::IFGE, IF::IFGT, IF::IFLE, IF_ICMP::IF_ICMPEQ,
         /* 0xa0 */  IF_ICMP::IF_ICMPNE, IF_ICMP::IF_ICMPLT, IF_ICMP::IF_ICMPGE, IF_ICMP::IF_ICMPGT,
         /* 0xa4 */  IF_ICMP::IF_ICMPLE, null, null, GOTO::new,

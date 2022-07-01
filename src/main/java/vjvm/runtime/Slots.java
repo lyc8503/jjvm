@@ -1,7 +1,5 @@
 package vjvm.runtime;
 
-import vjvm.utils.UnimplementedError;
-
 import java.util.Optional;
 
 /**
@@ -53,7 +51,7 @@ public class Slots {
     }
 
     public void byte_(int index, byte value) {
-        slots[index] = value;
+        slots[index] = (int) value;
     }
 
     public char char_(int index) {
@@ -61,7 +59,7 @@ public class Slots {
     }
 
     public void char_(int index, char value) {
-        slots[index] = value;
+        slots[index] = (int) value;
     }
 
     public short short_(int index) {
@@ -69,7 +67,7 @@ public class Slots {
     }
 
     public void short_(int index, short value) {
-        slots[index] = value;
+        slots[index] = (int) value;
     }
 
     public Optional<Object> value(int index) {

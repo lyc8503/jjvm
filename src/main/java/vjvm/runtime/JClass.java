@@ -9,7 +9,6 @@ import vjvm.runtime.classdata.FieldInfo;
 import vjvm.runtime.classdata.MethodInfo;
 import vjvm.runtime.classdata.attribute.Attribute;
 import vjvm.runtime.classdata.constant.ClassInfoConstant;
-import vjvm.utils.UnimplementedError;
 
 import java.io.DataInput;
 import java.io.InvalidClassException;

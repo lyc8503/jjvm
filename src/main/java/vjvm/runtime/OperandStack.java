@@ -1,7 +1,6 @@
 package vjvm.runtime;
 
 import lombok.Getter;
-import vjvm.utils.UnimplementedError;
 
 public class OperandStack {
     @Getter
@@ -56,7 +55,7 @@ public class OperandStack {
     }
 
     public void pushByte(byte value) {
-        slots.byte_(value);
+        slots.byte_(top, value);
         top += 1;
     }
 

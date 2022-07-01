@@ -7,7 +7,6 @@ import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
 import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
-import vjvm.runtime.classdata.constant.LongConstant;
 
 import java.util.Optional;
 

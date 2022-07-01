@@ -3,7 +3,6 @@ package vjvm.runtime.classdata.attribute;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import vjvm.runtime.classdata.ConstantPool;
-import vjvm.utils.UnimplementedError;
 
 import java.io.DataInput;
 

@@ -1,22 +1,32 @@
 package vjvm.interpreter.instruction.math;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
 import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+
 public class INC extends Instruction {
 
+    private final ProgramCounter pc;
+
     public static INC IINC(ProgramCounter pc, MethodInfo method) {
-        return new INC();
+        return new INC(pc);
     }
 
     @Override
     public void run(JThread thread) {
-        var stack = thread.top().stack();
-        int value1 = stack.popInt();
-        stack.pushInt(value1 + 1);
+
+        var slots = thread.top().vars();
+
+        int index = pc.ubyte();
+        int value = pc.byte_();
+
+        slots.int_(index, slots.int_(index) + value);
     }
 
     @Override

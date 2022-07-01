@@ -11,13 +11,15 @@ public class GOTO extends Instruction {
     private final ProgramCounter pc;
 
     public GOTO(ProgramCounter pc, MethodInfo method) {
-        branchByte = pc.ushort();
+        branchByte = pc.short_();
         this.pc = pc;
     }
 
     @Override
     public void run(JThread thread) {
-        pc.move(branchByte);
+        System.err.println("GOTO: branchByte " + branchByte);
+        pc.move(branchByte - 3);
+
     }
 
     @Override

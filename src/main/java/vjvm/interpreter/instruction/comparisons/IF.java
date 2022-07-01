@@ -23,27 +23,27 @@ public class IF extends Instruction {
 
 
     public static IF IFEQ(ProgramCounter pc, MethodInfo method) {
-        return new IF(pc.ushort(), Condition.EQ, pc, "ifeq");
+        return new IF(pc.short_(), Condition.EQ, pc, "ifeq");
     }
 
     public static IF IFNE(ProgramCounter pc, MethodInfo method) {
-        return new IF(pc.ushort(), Condition.NE, pc, "ifne");
+        return new IF(pc.short_(), Condition.NE, pc, "ifne");
     }
 
     public static IF IFLT(ProgramCounter pc, MethodInfo method) {
-        return new IF(pc.ushort(), Condition.LT, pc, "iflt");
+        return new IF(pc.short_(), Condition.LT, pc, "iflt");
     }
 
     public static IF IFGE(ProgramCounter pc, MethodInfo method) {
-        return new IF(pc.ushort(), Condition.GE, pc, "ifge");
+        return new IF(pc.short_(), Condition.GE, pc, "ifge");
     }
 
     public static IF IFGT(ProgramCounter pc, MethodInfo method) {
-        return new IF(pc.ushort(), Condition.GT, pc, "ifgt");
+        return new IF(pc.short_(), Condition.GT, pc, "ifgt");
     }
 
     public static IF IFLE(ProgramCounter pc, MethodInfo method) {
-        return new IF(pc.ushort(), Condition.LE, pc, "ifle");
+        return new IF(pc.short_(), Condition.LE, pc, "ifle");
     }
 
     @Override
@@ -76,7 +76,7 @@ public class IF extends Instruction {
         }
 
         if (success) {
-            pc.move(branchByte);
+            pc.move(branchByte - 3);
         }
     }
 
