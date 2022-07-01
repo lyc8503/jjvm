@@ -10,7 +10,7 @@ import java.util.Optional;
  */
 public class Slots {
 
-    Object[] slots;
+    public Object[] slots;
 
     public Slots(int slotSize) {
         slots = new Object[slotSize];

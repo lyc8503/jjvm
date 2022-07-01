@@ -84,6 +84,9 @@ public class JInterpreter {
             }
 
             var op = Decoder.decode(thread.pc(), frame.method());
+
+            System.err.println("Instruction: " + op.toString());
+
             steps--;
             op.run(thread);
 
