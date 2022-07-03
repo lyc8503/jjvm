@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.var;
 import vjvm.classfiledefs.Opcodes;
 import vjvm.interpreter.instruction.Decoder;
-import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.frame.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 
 import java.util.Arrays;

@@ -4,7 +4,7 @@ import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JClass;
 import vjvm.runtime.JThread;
-import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.frame.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 import vjvm.runtime.classdata.constant.MethodRefConstant;
 

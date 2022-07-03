@@ -2,7 +2,7 @@ package vjvm.interpreter.instruction.control;
 
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.frame.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 
 public class GOTO extends Instruction {
@@ -24,6 +24,6 @@ public class GOTO extends Instruction {
 
     @Override
     public String toString() {
-        return "goto";
+        return "goto " + branchByte;
     }
 }

@@ -5,9 +5,9 @@ import lombok.var;
 import org.apache.commons.lang3.tuple.Triple;
 import vjvm.classfiledefs.MethodDescriptors;
 import vjvm.interpreter.instruction.Decoder;
-import vjvm.runtime.JFrame;
+import vjvm.runtime.frame.JFrame;
 import vjvm.runtime.JThread;
-import vjvm.runtime.Slots;
+import vjvm.runtime.frame.Slots;
 import vjvm.runtime.classdata.MethodInfo;
 import vjvm.utils.InputUtils;
 

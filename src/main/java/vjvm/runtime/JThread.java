@@ -1,6 +1,8 @@
 package vjvm.runtime;
 
 import lombok.Getter;
+import vjvm.runtime.frame.JFrame;
+import vjvm.runtime.frame.ProgramCounter;
 import vjvm.vm.VMContext;
 
 import java.util.ArrayList;

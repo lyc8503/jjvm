@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.frame.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 
 
@@ -83,6 +83,6 @@ public class IF_ICMP extends Instruction {
 
     @Override
     public String toString() {
-        return name;
+        return name + " " + branchByte;
     }
 }

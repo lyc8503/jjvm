@@ -3,12 +3,12 @@ package vjvm.interpreter.instruction;
 import lombok.var;
 import vjvm.interpreter.instruction.comparisons.IF;
 import vjvm.interpreter.instruction.comparisons.IF_ICMP;
-import vjvm.interpreter.instruction.comparisons.XCMP;
+import vjvm.interpreter.instruction.comparisons.CMP;
 import vjvm.interpreter.instruction.constants.LDC;
 import vjvm.interpreter.instruction.constants.XCONST_Y;
-import vjvm.interpreter.instruction.constants.XPUSH;
+import vjvm.interpreter.instruction.constants.PUSH;
 import vjvm.interpreter.instruction.control.GOTO;
-import vjvm.interpreter.instruction.control.XRETURN;
+import vjvm.interpreter.instruction.control.RETURN;
 import vjvm.interpreter.instruction.conversions.X2Y;
 import vjvm.interpreter.instruction.loads.XLOAD_Y;
 import vjvm.interpreter.instruction.math.BIOP;
@@ -21,7 +21,7 @@ import vjvm.interpreter.instruction.stack.DUP;
 import vjvm.interpreter.instruction.stack.POP;
 import vjvm.interpreter.instruction.stack.SWAP;
 import vjvm.interpreter.instruction.stores.XSTORE_Y;
-import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.frame.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 import vjvm.utils.UnimplementedInstructionError;
 
@@ -49,7 +49,7 @@ public class Decoder {
         /* 0x04 */  XCONST_Y::ICONST_1, XCONST_Y::ICONST_2, XCONST_Y::ICONST_3, XCONST_Y::ICONST_4,
         /* 0x08 */  XCONST_Y::ICONST_5, XCONST_Y::LCONST_0, XCONST_Y::LCONST_1, XCONST_Y::FCONST_0,
         /* 0x0c */  XCONST_Y::FCONST_1, XCONST_Y::FCONST_2, XCONST_Y::DCONST_0, XCONST_Y::DCONST_1,
-        /* 0x10 */  XPUSH::BIPUSH, XPUSH::SIPUSH, LDC::LDC, LDC::LDC_W,
+        /* 0x10 */  PUSH::BIPUSH, PUSH::SIPUSH, LDC::LDC, LDC::LDC_W,
         /* 0x14 */  LDC::LDC2_W, XLOAD_Y::ILOAD, XLOAD_Y::LLOAD, XLOAD_Y::FLOAD,
         /* 0x18 */  XLOAD_Y::DLOAD, null, XLOAD_Y::ILOAD_0, XLOAD_Y::ILOAD_1,
         /* 0x1c */  XLOAD_Y::ILOAD_2, XLOAD_Y::ILOAD_3, XLOAD_Y::LLOAD_0, XLOAD_Y::LLOAD_1,
@@ -82,14 +82,14 @@ public class Decoder {
         /* 0x88 */  X2Y::L2I, X2Y::L2F, X2Y::L2D, X2Y::F2I,
         /* 0x8c */  X2Y::F2L, X2Y::F2D, X2Y::D2I, X2Y::D2L,
         /* 0x90 */  X2Y::D2F, X2Y::I2B, X2Y::I2C, X2Y::I2S,
-        /* 0x94 */  XCMP::LCMP, XCMP::FCMPL, XCMP::FCMPG, XCMP::DCMPL,
-        /* 0x98 */  XCMP::DCMPG, IF::IFEQ, IF::IFNE, IF::IFLT,
+        /* 0x94 */  CMP::LCMP, CMP::FCMPL, CMP::FCMPG, CMP::DCMPL,
+        /* 0x98 */  CMP::DCMPG, IF::IFEQ, IF::IFNE, IF::IFLT,
         /* 0x9c */  IF::IFGE, IF::IFGT, IF::IFLE, IF_ICMP::IF_ICMPEQ,
         /* 0xa0 */  IF_ICMP::IF_ICMPNE, IF_ICMP::IF_ICMPLT, IF_ICMP::IF_ICMPGE, IF_ICMP::IF_ICMPGT,
         /* 0xa4 */  IF_ICMP::IF_ICMPLE, null, null, GOTO::new,
         /* 0xa8 */  null, null, null, null,
-        /* 0xac */  XRETURN::IRETURN, XRETURN::LRETURN, XRETURN::FRETURN, XRETURN::DRETURN,
-        /* 0xb0 */  null, XRETURN::RETURN, null, null,
+        /* 0xac */  RETURN::IRETURN, RETURN::LRETURN, RETURN::FRETURN, RETURN::DRETURN,
+        /* 0xb0 */  null, RETURN::RETURN, null, null,
         /* 0xb4 */  null, null, null, null,
         /* 0xb8 */  INVOKESTATIC::new, null, null, null,
         /* 0xbc */  null, null, null, null,

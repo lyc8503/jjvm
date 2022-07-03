@@ -1,7 +1,8 @@
-package vjvm.runtime;
+package vjvm.runtime.frame;
 
 import lombok.Getter;
 import lombok.var;
+import vjvm.runtime.JClass;
 import vjvm.runtime.classdata.ConstantPool;
 import vjvm.runtime.classdata.MethodInfo;
 

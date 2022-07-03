@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.OperandStack;
-import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.frame.OperandStack;
+import vjvm.runtime.frame.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 
 import java.util.function.BiConsumer;
@@ -110,6 +110,6 @@ public class XLOAD_Y<T> extends Instruction {
 
     @Override
     public String toString() {
-        return name;
+        return name + " " + index;
     }
 }

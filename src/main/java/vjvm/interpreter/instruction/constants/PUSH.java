@@ -5,20 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.frame.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class XPUSH extends Instruction {
+public class PUSH extends Instruction {
     private final int value;
     private final String name;
 
-    public static XPUSH BIPUSH(ProgramCounter pc, MethodInfo method) {
-        return new XPUSH(pc.byte_(), "bipush");
+    public static PUSH BIPUSH(ProgramCounter pc, MethodInfo method) {
+        return new PUSH(pc.byte_(), "bipush");
     }
 
-    public static XPUSH SIPUSH(ProgramCounter pc, MethodInfo method) {
-        return new XPUSH(pc.short_(), "sipush");
+    public static PUSH SIPUSH(ProgramCounter pc, MethodInfo method) {
+        return new PUSH(pc.short_(), "sipush");
     }
 
     @Override

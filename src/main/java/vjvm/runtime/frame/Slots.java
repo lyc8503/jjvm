@@ -1,4 +1,4 @@
-package vjvm.runtime;
+package vjvm.runtime.frame;
 
 import java.util.Optional;
 

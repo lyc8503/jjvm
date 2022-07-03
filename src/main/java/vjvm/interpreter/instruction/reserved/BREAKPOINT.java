@@ -3,7 +3,7 @@ package vjvm.interpreter.instruction.reserved;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.frame.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 
 public class BREAKPOINT extends Instruction {
