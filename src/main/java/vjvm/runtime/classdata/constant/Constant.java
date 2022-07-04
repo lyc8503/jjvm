@@ -3,7 +3,7 @@ package vjvm.runtime.classdata.constant;
 import lombok.SneakyThrows;
 import lombok.var;
 import org.apache.commons.lang3.tuple.Pair;
-import vjvm.runtime.JClass;
+import vjvm.runtime.classdata.JClass;
 
 import java.io.DataInput;
 
@@ -55,10 +55,10 @@ public abstract class Constant {
                 result = new FieldRefConstant(input, jClass);
                 break;
             case CONSTANT_Methodref:
-                result = new MethodRefConstant(input, jClass);
+                result = new MethodRefConstant(input, jClass, false);
                 break;
             case CONSTANT_InterfaceMethodref:
-                result = new InterfaceMethodRefConstant(input, jClass);
+                result = new MethodRefConstant(input, jClass, true);
                 break;
             case CONSTANT_Dynamic:
             case CONSTANT_InvokeDynamic:

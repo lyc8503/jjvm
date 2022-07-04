@@ -8,10 +8,6 @@ import vjvm.runtime.JThread;
 import vjvm.runtime.frame.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
 
-enum Condition {
-    EQ, NE, LT, GE, GT, LE
-}
-
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 
 public class IF extends Instruction {

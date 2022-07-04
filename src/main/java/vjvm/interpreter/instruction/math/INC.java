@@ -11,6 +11,9 @@ import vjvm.runtime.classdata.MethodInfo;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 
 public class INC extends Instruction {
+    /**
+     * INC 指令
+     */
 
     private final ProgramCounter pc;
 

@@ -18,4 +18,5 @@ public class IOUtil {
     IOUtil.writeDouble(1.0);
     IOUtil.writeChar(IOUtil.readChar());
   }
+
 }

@@ -8,6 +8,7 @@ import vjvm.runtime.JThread;
 import vjvm.runtime.frame.OperandStack;
 import vjvm.runtime.frame.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
+import vjvm.runtime.heap.Reference;
 
 import java.util.function.BiConsumer;
 
@@ -97,6 +98,28 @@ public class XLOAD_Y<T> extends Instruction {
     public static XLOAD_Y<Double> DLOAD_3(ProgramCounter pc, MethodInfo method) {
         return new XLOAD_Y<>(3, OperandStack::pushDouble, "dload_3");
     }
+
+    public static XLOAD_Y<Reference> ALOAD(ProgramCounter pc, MethodInfo method) {
+        return new XLOAD_Y<>(pc.ubyte(), OperandStack::pushReference, "aload");
+    }
+
+    public static XLOAD_Y<Reference> ALOAD_0(ProgramCounter pc, MethodInfo method) {
+        return new XLOAD_Y<>(0, OperandStack::pushReference, "aload_0");
+    }
+
+    public static XLOAD_Y<Reference> ALOAD_1(ProgramCounter pc, MethodInfo method) {
+        return new XLOAD_Y<>(1, OperandStack::pushReference, "aload_1");
+    }
+
+    public static XLOAD_Y<Reference> ALOAD_2(ProgramCounter pc, MethodInfo method) {
+        return new XLOAD_Y<>(2, OperandStack::pushReference, "aload_2");
+    }
+
+    public static XLOAD_Y<Reference> ALOAD_3(ProgramCounter pc, MethodInfo method) {
+        return new XLOAD_Y<>(3, OperandStack::pushReference, "aload_3");
+    }
+
+
 
 
     @Override

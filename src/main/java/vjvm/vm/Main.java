@@ -3,7 +3,7 @@ package vjvm.vm;
 import lombok.var;
 import picocli.CommandLine;
 import vjvm.classfiledefs.Descriptors;
-import vjvm.runtime.JClass;
+import vjvm.runtime.classdata.JClass;
 
 import java.util.concurrent.Callable;
 
@@ -65,6 +65,7 @@ class Dump implements Callable<Integer> {
 
     @Override
     public Integer call() {
+
         var ctx = new VMContext(parent.userClassPath);
 
         // the package vjvm.classfiledefs contains some constants and utility

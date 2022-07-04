@@ -3,8 +3,8 @@ package vjvm.runtime.classdata;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import vjvm.runtime.JClass;
 import vjvm.runtime.classdata.attribute.Attribute;
+import vjvm.runtime.classdata.attribute.ConstantValue;
 import vjvm.runtime.classdata.constant.UTF8Constant;
 
 import java.io.DataInput;
@@ -23,6 +23,9 @@ public class FieldInfo {
     @Getter
     private JClass jClass;
 
+    @Getter
+    private ConstantValue constantValue;
+
     @SneakyThrows
     public FieldInfo(DataInput dataInput, JClass jClass) {
 
@@ -36,6 +39,10 @@ public class FieldInfo {
         attributes = new Attribute[attributesCount];
         for (int i = 0; i < attributes.length; i++) {
             attributes[i] = Attribute.constructFromData(dataInput, jClass.constantPool());
+
+//            if (attributes[i] instanceof ConstantValue) {
+//                constantValue = (ConstantValue) attributes[i];
+//            }
         }
 
 //        throw new UnimplementedError("TODO: get field info from constant pool");

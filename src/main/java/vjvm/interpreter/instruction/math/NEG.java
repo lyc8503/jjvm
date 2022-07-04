@@ -16,6 +16,10 @@ import java.util.function.Function;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class NEG<T extends Number> extends Instruction {
 
+    /**
+     * NEG 指令
+     */
+
     private final Function<OperandStack, T> popFunc;
 
     private final Function<T, T> negFunc;

@@ -2,7 +2,7 @@ package vjvm.runtime.classdata.constant;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
-import vjvm.runtime.JClass;
+import vjvm.runtime.classdata.JClass;
 
 import java.io.DataInput;
 
@@ -20,6 +20,10 @@ public class ClassInfoConstant extends Constant {
 
     public String name() {
         return ((UTF8Constant) jClass.constantPool().constant(nameIndex)).value();
+    }
+
+    public JClass getJClass() {
+        return jClass.classLoader().loadClass("L" + name() + ";");
     }
 
     @Override

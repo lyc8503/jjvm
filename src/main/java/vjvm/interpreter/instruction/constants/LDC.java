@@ -5,12 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
+import vjvm.runtime.classdata.constant.*;
 import vjvm.runtime.frame.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
-import vjvm.runtime.classdata.constant.DoubleConstant;
-import vjvm.runtime.classdata.constant.FloatConstant;
-import vjvm.runtime.classdata.constant.IntegerConstant;
-import vjvm.runtime.classdata.constant.LongConstant;
+import vjvm.runtime.heap.Reference;
 import vjvm.utils.UnimplementedError;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

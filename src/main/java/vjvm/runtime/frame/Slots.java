@@ -1,5 +1,7 @@
 package vjvm.runtime.frame;
 
+import vjvm.runtime.heap.Reference;
+
 import java.util.Optional;
 
 /**
@@ -68,6 +70,14 @@ public class Slots {
 
     public void short_(int index, short value) {
         slots[index] = (int) value;
+    }
+
+    public void reference(int index, Reference ref) {
+        slots[index] = ref;
+    }
+
+    public Reference reference(int index) {
+        return (Reference) slots[index];
     }
 
     public Optional<Object> value(int index) {

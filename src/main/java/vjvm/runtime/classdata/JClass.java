@@ -1,17 +1,19 @@
-package vjvm.runtime;
+package vjvm.runtime.classdata;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.var;
 import vjvm.classloader.JClassLoader;
-import vjvm.runtime.classdata.ConstantPool;
-import vjvm.runtime.classdata.FieldInfo;
-import vjvm.runtime.classdata.MethodInfo;
+import vjvm.runtime.JThread;
 import vjvm.runtime.classdata.attribute.Attribute;
 import vjvm.runtime.classdata.constant.ClassInfoConstant;
+import vjvm.runtime.classdata.constant.FieldRefConstant;
+import vjvm.runtime.frame.Slots;
+import vjvm.runtime.heap.Fields;
 
 import java.io.DataInput;
 import java.io.InvalidClassException;
+import java.util.Arrays;
 
 import static vjvm.classfiledefs.ClassAccessFlags.*;
 
@@ -32,12 +34,17 @@ public class JClass {
     private final MethodInfo[] methods;
     private final Attribute[] attributes;
 
+    private Fields fieldsData;
+
 
     @Getter
     private final String thisClass;
 
     @Getter
     private final String superClass;
+
+    @Getter
+    private boolean initialized;
 
     @SneakyThrows
     public JClass(DataInput dataInput, JClassLoader classLoader) {
@@ -60,8 +67,13 @@ public class JClass {
         int superIndex = dataInput.readUnsignedShort();
 
         thisClass = ((ClassInfoConstant) (constantPool.constant(thisIndex))).name();
-        superClass = ((ClassInfoConstant) (constantPool.constant(superIndex))).name();
 
+        if ("java/lang/Object".equals(thisClass)) {
+            assert constantPool.constant(superIndex) == null;
+            superClass = null;  // Object Class doesn't have a super class
+        } else {
+            superClass = ((ClassInfoConstant) (constantPool.constant(superIndex))).name();
+        }
 
         int interfacesCount = dataInput.readUnsignedShort();
         interfaces = new int[interfacesCount];
@@ -88,10 +100,37 @@ public class JClass {
             attributes[i] = Attribute.constructFromData(dataInput, constantPool);
         }
 
+
+
+//        for (int i = 0; i < fields.length; i++) {
+//            if (fields[i].constantValue() != null) {
+//                System.err.println(fields[i].constantValue());
+//            }
+//        }
+
+
+        // TODO: more init work!
+
 //        throw new UnimplementedError(
 //            "TODO: you need to construct thisClass, superClass, interfaces, fields, "
 //                + "methods, and attributes from dataInput in lab 1.2; remove this for lab 1.1."
 //                + "Some of them are not defined; you need to define them yourself");
+    }
+
+    public void init(JThread thread) {
+
+        if (initialized) return;
+
+        initialized = true;
+
+        fieldsData = new Fields(this, true);
+
+        // invoke <clinit>
+        Arrays.stream(methods).filter(s -> s.name().equals("<clinit>")).findFirst().ifPresent((cinitMethod) -> {
+                thread.context().interpreter().invoke(cinitMethod, thread, new Slots(0));
+            }
+        );
+
     }
 
     public MethodInfo findMethod(String name, String descriptor) {
@@ -165,4 +204,16 @@ public class JClass {
     public String name() {
         return thisClass;
     }
+
+    public Object getField(FieldRefConstant fieldRef) {
+        assert initialized;
+        return fieldsData.getField(fieldRef.nameAndType().name());
+    }
+
+    public void putField(FieldRefConstant fieldRef, Object value) {
+        assert initialized;
+        fieldsData.putField(fieldRef.nameAndType().name(), value);
+    }
+
+
 }

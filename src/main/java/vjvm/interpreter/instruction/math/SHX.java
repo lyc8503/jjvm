@@ -16,7 +16,9 @@ import java.util.function.Function;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 
 public class SHX<T> extends Instruction {
-
+    /**
+     * 左右移指令
+     */
     private final Function<OperandStack, T> popFunc;
     private final BiFunction<T, Integer, T> calcFunc;
     private final BiConsumer<OperandStack, T> pushFunc;

@@ -14,8 +14,10 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-
 public class BIOP<T> extends Instruction {
+    /**
+     * 二元运算
+     */
 
     private final Function<OperandStack, T> popFunc;
     private final BiFunction<T, T, T> calcFunc;

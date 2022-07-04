@@ -1,6 +1,8 @@
 package vjvm.runtime.frame;
 
 import lombok.Getter;
+import vjvm.classfiledefs.Descriptors;
+import vjvm.runtime.heap.Reference;
 
 public class OperandStack {
     @Getter
@@ -82,6 +84,63 @@ public class OperandStack {
     public short popShort() {
         top -= 1;
         return slots.short_(top);
+    }
+
+    public void pushReference(Reference reference) {
+        slots.reference(top, reference);
+        top += 1;
+    }
+
+    public Reference popReference() {
+        top -= 1;
+        return slots.reference(top);
+    }
+
+    public void push(String desc, Object value) {
+        switch (desc.charAt(0)) {
+            case Descriptors.DESC_byte:
+            case Descriptors.DESC_char:
+            case Descriptors.DESC_int:
+            case Descriptors.DESC_short:
+            case Descriptors.DESC_boolean:
+                pushInt((int) value);
+                break;
+            case Descriptors.DESC_double:
+                pushDouble((double) value);
+                break;
+            case Descriptors.DESC_float:
+                pushFloat((float) value);
+                break;
+            case Descriptors.DESC_long:
+                pushLong((long) value);
+                break;
+            case Descriptors.DESC_reference:
+                pushReference((Reference) value);
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }
+
+    public Object pop(String desc) {
+        switch (desc.charAt(0)) {
+            case Descriptors.DESC_byte:
+            case Descriptors.DESC_char:
+            case Descriptors.DESC_int:
+            case Descriptors.DESC_short:
+            case Descriptors.DESC_boolean:
+                return popInt();
+            case Descriptors.DESC_double:
+                return popDouble();
+            case Descriptors.DESC_float:
+                return popFloat();
+            case Descriptors.DESC_long:
+                return popLong();
+            case Descriptors.DESC_reference:
+                return popReference();
+            default:
+                throw new AssertionError();
+        }
     }
 
     public void pushSlots(Slots slots) {

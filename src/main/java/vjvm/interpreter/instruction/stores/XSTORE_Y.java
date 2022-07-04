@@ -8,6 +8,7 @@ import vjvm.runtime.JThread;
 import vjvm.runtime.frame.OperandStack;
 import vjvm.runtime.frame.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
+import vjvm.runtime.heap.Reference;
 
 import java.util.function.Function;
 
@@ -96,6 +97,26 @@ public class XSTORE_Y<T> extends Instruction {
 
     public static XSTORE_Y<Double> DSTORE_3(ProgramCounter pc, MethodInfo method) {
         return new XSTORE_Y<>(3, OperandStack::popDouble, "dstore_3");
+    }
+
+    public static XSTORE_Y<Reference> ASTORE(ProgramCounter pc, MethodInfo method) {
+        return new XSTORE_Y<>(pc.ubyte(), OperandStack::popReference, "astore");
+    }
+
+    public static XSTORE_Y<Reference> ASTORE_0(ProgramCounter pc, MethodInfo method) {
+        return new XSTORE_Y<>(0, OperandStack::popReference, "astore_0");
+    }
+
+    public static XSTORE_Y<Reference> ASTORE_1(ProgramCounter pc, MethodInfo method) {
+        return new XSTORE_Y<>(1, OperandStack::popReference, "astore_1");
+    }
+
+    public static XSTORE_Y<Reference> ASTORE_2(ProgramCounter pc, MethodInfo method) {
+        return new XSTORE_Y<>(2, OperandStack::popReference, "astore_2");
+    }
+
+    public static XSTORE_Y<Reference> ASTORE_3(ProgramCounter pc, MethodInfo method) {
+        return new XSTORE_Y<>(3, OperandStack::popReference, "astore_3");
     }
 
 

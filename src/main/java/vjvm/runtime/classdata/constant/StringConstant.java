@@ -2,7 +2,7 @@ package vjvm.runtime.classdata.constant;
 
 import lombok.SneakyThrows;
 import org.apache.commons.text.StringEscapeUtils;
-import vjvm.runtime.JClass;
+import vjvm.runtime.classdata.JClass;
 
 import java.io.DataInput;
 

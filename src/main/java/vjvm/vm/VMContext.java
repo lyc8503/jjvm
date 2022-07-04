@@ -7,9 +7,9 @@ import vjvm.classloader.searchpath.ClassSearchPath;
 import vjvm.classloader.searchpath.ModuleSearchPath;
 import vjvm.interpreter.JInterpreter;
 import vjvm.interpreter.JMonitor;
-import vjvm.runtime.JHeap;
 import vjvm.runtime.JThread;
 import vjvm.runtime.frame.Slots;
+import vjvm.runtime.heap.JHeap;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class VMContext {
     @Getter
     private final JMonitor monitor;
     private final ArrayList<JThread> threads = new ArrayList<>();
-
+    @Getter
     private final JHeap heap;
 
     public VMContext(String userClassPath) {
