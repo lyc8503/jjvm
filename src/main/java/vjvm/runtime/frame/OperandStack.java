@@ -115,6 +115,7 @@ public class OperandStack {
                 pushLong((long) value);
                 break;
             case Descriptors.DESC_reference:
+            case Descriptors.DESC_array:
                 pushReference((Reference) value);
                 break;
             default:
@@ -137,6 +138,7 @@ public class OperandStack {
             case Descriptors.DESC_long:
                 return popLong();
             case Descriptors.DESC_reference:
+            case Descriptors.DESC_array:
                 return popReference();
             default:
                 throw new AssertionError();

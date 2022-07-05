@@ -27,7 +27,16 @@ public class MethodRefConstant extends Constant {
 
     public MethodInfo getMethod() {
         var nameAndType = nameAndType();
-        return classInfo().getJClass().findMethod(nameAndType.name(), nameAndType.type());
+
+        var clazz = classInfo().getJClass();
+
+        var method = clazz.findMethod(nameAndType.name(), nameAndType.type());
+        while (method == null) {
+            clazz = clazz.classLoader().loadClass("L" + clazz.superClass() + ";");
+            method = clazz.findMethod(nameAndType.name(), nameAndType.type());
+        }
+
+        return method;
     }
 
     public NameAndTypeConstant nameAndType() {

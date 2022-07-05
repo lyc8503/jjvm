@@ -13,6 +13,7 @@ import vjvm.interpreter.instruction.control.GOTO;
 import vjvm.interpreter.instruction.control.RETURN;
 import vjvm.interpreter.instruction.conversions.X2Y;
 import vjvm.interpreter.instruction.extended.IF_NULL;
+import vjvm.interpreter.instruction.loads.XALOAD;
 import vjvm.interpreter.instruction.loads.XLOAD_Y;
 import vjvm.interpreter.instruction.math.BIOP;
 import vjvm.interpreter.instruction.math.INC;
@@ -23,6 +24,7 @@ import vjvm.interpreter.instruction.reserved.BREAKPOINT;
 import vjvm.interpreter.instruction.stack.DUP;
 import vjvm.interpreter.instruction.stack.POP;
 import vjvm.interpreter.instruction.stack.SWAP;
+import vjvm.interpreter.instruction.stores.XASTORE;
 import vjvm.interpreter.instruction.stores.XSTORE_Y;
 import vjvm.runtime.frame.ProgramCounter;
 import vjvm.runtime.classdata.MethodInfo;
@@ -59,17 +61,17 @@ public class Decoder {
         /* 0x20 */  XLOAD_Y::LLOAD_2, XLOAD_Y::LLOAD_3, XLOAD_Y::FLOAD_0, XLOAD_Y::FLOAD_1,
         /* 0x24 */  XLOAD_Y::FLOAD_2, XLOAD_Y::FLOAD_3, XLOAD_Y::DLOAD_0, XLOAD_Y::DLOAD_1,
         /* 0x28 */  XLOAD_Y::DLOAD_2, XLOAD_Y::DLOAD_3, XLOAD_Y::ALOAD_0, XLOAD_Y::ALOAD_1,
-        /* 0x2c */  XLOAD_Y::ALOAD_2, XLOAD_Y::ALOAD_3, null, null,
-        /* 0x30 */  null, null, null, null,
-        /* 0x34 */  null, null, XSTORE_Y::ISTORE, XSTORE_Y::LSTORE,
+        /* 0x2c */  XLOAD_Y::ALOAD_2, XLOAD_Y::ALOAD_3, XALOAD::IALOAD, XALOAD::LALOAD,
+        /* 0x30 */  XALOAD::FALOAD, XALOAD::DALOAD, XALOAD::AALOAD, XALOAD::BALOAD,
+        /* 0x34 */  XALOAD::CALOAD, XALOAD::SALOAD, XSTORE_Y::ISTORE, XSTORE_Y::LSTORE,
         /* 0x38 */  XSTORE_Y::FSTORE, XSTORE_Y::DSTORE, XSTORE_Y::ASTORE, XSTORE_Y::ISTORE_0,
         /* 0x3c */  XSTORE_Y::ISTORE_1, XSTORE_Y::ISTORE_2, XSTORE_Y::ISTORE_3, XSTORE_Y::LSTORE_0,
         /* 0x40 */  XSTORE_Y::LSTORE_1, XSTORE_Y::LSTORE_2, XSTORE_Y::LSTORE_3, XSTORE_Y::FSTORE_0,
         /* 0x44 */  XSTORE_Y::FSTORE_1, XSTORE_Y::FSTORE_2, XSTORE_Y::FSTORE_3, XSTORE_Y::DSTORE_0,
         /* 0x48 */  XSTORE_Y::DSTORE_1, XSTORE_Y::DSTORE_2, XSTORE_Y::DSTORE_3, XSTORE_Y::ASTORE_0,
-        /* 0x4c */  XSTORE_Y::ASTORE_1, XSTORE_Y::ASTORE_2, XSTORE_Y::ASTORE_3, null,
-        /* 0x50 */  null, null, null, null,
-        /* 0x54 */  null, null, null, POP::POP,
+        /* 0x4c */  XSTORE_Y::ASTORE_1, XSTORE_Y::ASTORE_2, XSTORE_Y::ASTORE_3, XASTORE::IASTORE,
+        /* 0x50 */  XASTORE::LASTORE, XASTORE::FASTORE, XASTORE::DASTORE, XASTORE::AASTORE,
+        /* 0x54 */  XASTORE::BASTORE, XASTORE::CASTORE, XASTORE::SASTORE, POP::POP,
         /* 0x58 */  POP::POP2, DUP::DUP, DUP::DUP_X1, DUP::DUP_X2,
         /* 0x5c */  DUP::DUP2, DUP::DUP2_X1, DUP::DUP2_X2, SWAP::new,
         /* 0x60 */  BIOP::IADD, BIOP::LADD, BIOP::FADD, BIOP::DADD,
@@ -95,8 +97,8 @@ public class Decoder {
         /* 0xb0 */  null, RETURN::RETURN, GETSTATIC::new, PUTSTATIC::new,
         /* 0xb4 */  GETFIELD::new, PUTFIELD::new, INVOKEVIRTUAL::new, INVOKESPECIAL::new,
         /* 0xb8 */  INVOKESTATIC::new, null, null, NEW::new,
-        /* 0xbc */  null, null, null, null,
-        /* 0xc0 */  null, null, null, null,
+        /* 0xbc */  NEWARRAY::NEWARRAY, NEWARRAY::ANEWARRAY, ARRAYLENGTH::new, null,
+        /* 0xc0 */  CHECKCAST::new, null, null, null,
         /* 0xc4 */  null, null, IF_NULL::IFNULL, IF_NULL::IFNONNULL,
         /* 0xc8 */  null, null, BREAKPOINT::new, null,
         /* 0xcc */  null, null, null, null,

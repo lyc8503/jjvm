@@ -25,4 +25,31 @@ public class RunClassesTest {
         TestUtils.runClass("lab3.StaticFields");
     }
 
+    @Test
+    public void runPolymorphism() {
+        TestUtils.runClass("lab3.Polymorphism");
+    }
+
+    @Test
+    public void runInheritance() {
+        TestUtils.runClass("lab3.Inheritance");
+    }
+
+    @Test
+    public void runOverride() {
+        TestUtils.runClass("lab3.Override");
+    }
+
+    @Test
+    public void runArray() {
+        TestUtils.runClass("lab3.Array");
+    }
+
+    @Test
+    public void runBubbleSort() {
+        TestUtils.runClass("lab3.BubbleSort");
+    }
+
+
+
 }

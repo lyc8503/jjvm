@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
+import vjvm.runtime.classdata.MethodInfo;
 import vjvm.runtime.frame.OperandStack;
 import vjvm.runtime.frame.ProgramCounter;
-import vjvm.runtime.classdata.MethodInfo;
 import vjvm.runtime.heap.Reference;
 
 import java.util.function.BiConsumer;
@@ -118,9 +118,6 @@ public class XLOAD_Y<T> extends Instruction {
     public static XLOAD_Y<Reference> ALOAD_3(ProgramCounter pc, MethodInfo method) {
         return new XLOAD_Y<>(3, OperandStack::pushReference, "aload_3");
     }
-
-
-
 
     @Override
     public void run(JThread thread) {

@@ -21,8 +21,6 @@ public class Fields {
             case Descriptors.DESC_int:
             case Descriptors.DESC_short:
                 return 0;
-            case Descriptors.DESC_array:
-                throw new UnimplementedError();
             case Descriptors.DESC_double:
                 return 0.0d;
             case Descriptors.DESC_float:
@@ -30,6 +28,7 @@ public class Fields {
             case Descriptors.DESC_long:
                 return 0L;
             case Descriptors.DESC_reference:
+            case Descriptors.DESC_array:
                 return Reference.NULL;
             default:
                 throw new AssertionError();
@@ -38,12 +37,20 @@ public class Fields {
 
     public Fields(JClass jClass, boolean static_) {
         map = new HashMap<>();
-        for (int i = 0; i < jClass.fieldsCount(); i++) {
-            var field = jClass.field(i);
-            if (field.static_() == static_) {
-                map.put(field.name(), getDefaultValue(field.descriptor().charAt(0)));
+
+        while (jClass.superClass() != null) {
+            for (int i = 0; i < jClass.fieldsCount(); i++) {
+                var field = jClass.field(i);
+                if (field.static_() == static_ && !map.containsKey(field.name())) {  // https://stackoverflow.com/questions/43579567/java-inheritance-fields
+                    map.put(field.name(), getDefaultValue(field.descriptor().charAt(0)));
+                }
+            }
+            jClass = jClass.classLoader().loadClass("L" + jClass.superClass() + ";");
+            if (static_) {  // put all instance fields in one Fields obj, but put static fields separately in each class
+                break;
             }
         }
+
     }
 
     public Object getField(String name) {
@@ -56,8 +63,12 @@ public class Fields {
     public void putField(String name, Object value) {
         // check the type
         assert map.containsKey(name);
-        assert map.get(name).getClass() == value.getClass();
+        assert map.get(name).getClass() == value.getClass() || value instanceof ArrayReference;
 
         map.put(name, value);
+    }
+
+    public boolean containsField(String name) {
+        return map.containsKey(name);
     }
 }

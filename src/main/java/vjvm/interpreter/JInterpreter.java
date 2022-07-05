@@ -176,5 +176,10 @@ public class JInterpreter {
             System.out.println(a.char_(0));
             return null;
         });
+
+        nativeTable.put(Triple.of("java/lang/Object", "registerNatives", "()V"), (t, a) -> {
+            // TODO: ignore
+            return null;
+        });
     }
 }

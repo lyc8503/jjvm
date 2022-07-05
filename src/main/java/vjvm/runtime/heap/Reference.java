@@ -17,6 +17,7 @@ public class Reference {
     @Getter
     private final int innerIndex;
 
+
     protected Reference(JHeap heap, JClass jClass, int innerIndex) {
         this.heap = heap;
         this.jClass = jClass;
@@ -34,5 +35,4 @@ public class Reference {
         var fields = heap.fieldsMap.get(innerIndex);
         fields.putField(ref.nameAndType().name(), value);
     }
-
 }

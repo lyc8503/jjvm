@@ -120,8 +120,13 @@ public class JClass {
     public void init(JThread thread) {
 
         if (initialized) return;
-
         initialized = true;
+
+        // init super
+        if (superClass != null) {
+            var super_ = classLoader.loadClass("L" + superClass + ";");
+            super_.init(thread);
+        }
 
         fieldsData = new Fields(this, true);
 
@@ -207,12 +212,30 @@ public class JClass {
 
     public Object getField(FieldRefConstant fieldRef) {
         assert initialized;
-        return fieldsData.getField(fieldRef.nameAndType().name());
+        var name = fieldRef.nameAndType().name();
+        if (fieldsData.containsField(name)) {
+            return fieldsData.getField(fieldRef.nameAndType().name());
+        } else {
+            assert superClass != null;
+
+            var super_ = classLoader.loadClass("L" + superClass + ";");
+            return super_.getField(fieldRef);
+        }
     }
 
     public void putField(FieldRefConstant fieldRef, Object value) {
         assert initialized;
-        fieldsData.putField(fieldRef.nameAndType().name(), value);
+
+        var name = fieldRef.nameAndType().name();
+
+        if (fieldsData.containsField(name)) {
+            fieldsData.putField(name, value);
+        } else {
+            assert superClass != null;
+
+            var super_ = classLoader.loadClass("L" + superClass + ";");
+            super_.putField(fieldRef, value);
+        }
     }
 
 
