@@ -39,16 +39,9 @@ class Run implements Callable<Integer> {
     @Parameters(index = "1..*", description = "Arguments passed to java program")
     private String[] args = {};
 
-    @Option(names = {"-d", "--debug"}, description = "Stop at the first instruction and start monitor")
-    boolean debug = false;
-
     @Override
     public Integer call() {
         var ctx = new VMContext(parent.userClassPath);
-        if (debug) {
-            ctx.interpreter().step(0);
-        }
-
         ctx.run(entryClass);
         return 0;
     }

@@ -50,6 +50,9 @@ public class RunClassesTest {
         TestUtils.runClass("lab3.BubbleSort");
     }
 
-
+//    @Test
+//    public void runStringTest() {
+//        TestUtils.runClass("lab3.StringTest");
+//    }
 
 }

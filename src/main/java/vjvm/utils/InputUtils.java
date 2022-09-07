@@ -35,8 +35,6 @@ public class InputUtils {
             c = in.read();
         }
 
-        System.err.println("IOUtil readLong: " + (negative ? -i : i));
-
         return negative ? -i : i;
     }
 

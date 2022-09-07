@@ -2,11 +2,11 @@ package vjvm.vm;
 
 import lombok.Getter;
 import lombok.var;
+import vjvm.classfiledefs.Descriptors;
 import vjvm.classloader.JClassLoader;
 import vjvm.classloader.searchpath.ClassSearchPath;
 import vjvm.classloader.searchpath.ModuleSearchPath;
 import vjvm.interpreter.JInterpreter;
-import vjvm.interpreter.JMonitor;
 import vjvm.runtime.JThread;
 import vjvm.runtime.frame.Slots;
 import vjvm.runtime.heap.JHeap;
@@ -21,14 +21,12 @@ public class VMContext {
     @Getter
     private final JInterpreter interpreter;
     @Getter
-    private final JMonitor monitor;
     private final ArrayList<JThread> threads = new ArrayList<>();
     @Getter
     private final JHeap heap;
 
     public VMContext(String userClassPath) {
         interpreter = new JInterpreter();
-        monitor = new JMonitor(this);
 
         heap = new JHeap();
 
@@ -49,7 +47,7 @@ public class VMContext {
         var initThread = new JThread(this);
         threads.add(initThread);
 
-        var entry = userLoader.loadClass('L' + entryClass.replace('.', '/') + ';');
+        var entry = userLoader.loadClass(Descriptors.of(entryClass));
 
         var mainMethod = entry.findMethod("main", "([Ljava/lang/String;)V");
         assert mainMethod.jClass() == entry;

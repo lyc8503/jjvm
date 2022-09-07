@@ -13,7 +13,6 @@ public class Fields {
 
     public static Object getDefaultValue(char desc) {
         // default values for the fields
-        System.err.println(desc);
         switch (desc) {
             case Descriptors.DESC_byte:
             case Descriptors.DESC_boolean:

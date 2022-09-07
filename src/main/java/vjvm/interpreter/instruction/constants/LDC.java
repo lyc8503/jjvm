@@ -48,6 +48,10 @@ public class LDC extends Instruction {
                 opStack.pushFloat(((FloatConstant) constant).value());
             } else if (constant instanceof IntegerConstant) {
                 opStack.pushInt(((IntegerConstant) constant).value());
+            } else if (constant instanceof StringConstant) {
+                var strClass = thread.top().jClass().classLoader().loadClass("Ljava/lang/String;");
+//                strClass.init(thread);
+                opStack.pushReference(thread.context().heap().alloc(strClass));
             } else {
                 throw new UnimplementedError();
             }

@@ -100,7 +100,7 @@ public class Decoder {
         /* 0xbc */  NEWARRAY::NEWARRAY, NEWARRAY::ANEWARRAY, ARRAYLENGTH::new, null,
         /* 0xc0 */  CHECKCAST::new, null, null, null,
         /* 0xc4 */  null, null, IF_NULL::IFNULL, IF_NULL::IFNONNULL,
-        /* 0xc8 */  null, null, BREAKPOINT::new, null,
+        /* 0xc8 */  null, null, null, null,
         /* 0xcc */  null, null, null, null,
         /* 0xd0 */  null, null, null, null,
         /* 0xd4 */  null, null, null, null,

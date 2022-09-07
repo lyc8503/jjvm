@@ -14,7 +14,6 @@ public class BREAKPOINT extends Instruction {
     public void run(JThread thread) {
         var pc = thread.pc();
         pc.position(pc.position() - 1);
-        thread.context().interpreter().break_();
     }
 
     @Override

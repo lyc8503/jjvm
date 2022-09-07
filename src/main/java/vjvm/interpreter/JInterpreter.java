@@ -1,6 +1,5 @@
 package vjvm.interpreter;
 
-import lombok.Getter;
 import lombok.var;
 import org.apache.commons.lang3.tuple.Triple;
 import vjvm.classfiledefs.MethodDescriptors;
@@ -11,10 +10,7 @@ import vjvm.runtime.frame.Slots;
 import vjvm.runtime.classdata.MethodInfo;
 import vjvm.utils.InputUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.function.BiFunction;
 
 import static vjvm.classfiledefs.Descriptors.*;
@@ -22,12 +18,6 @@ import static vjvm.classfiledefs.Descriptors.*;
 public class JInterpreter {
     // (ClassName, MethodName, MethodDescriptor) -> HackFunction
     private static final HashMap<Triple<String, String, String>, BiFunction<JThread, Slots, Object>> nativeTable = new HashMap<>();
-
-    @Getter
-    private Status status = Status.CONTINUE;
-    private long steps;
-
-    private final ArrayList<Breakpoint> breakpoints = new ArrayList<>();
 
     /**
      * Invoke a method when there is no frames in a thread.
@@ -47,41 +37,11 @@ public class JInterpreter {
         }
     }
 
-    public void step(long steps) {
-        assert steps >= 0;
-
-        status = Status.STEP;
-        this.steps = steps;
-    }
-
-    public void continue_() {
-        status = Status.CONTINUE;
-    }
-
-    public void break_() {
-        status = Status.BREAK;
-    }
-
-    public void setBreakpoint(MethodInfo method, int offset) {
-        // TODO(optional): add and enable a breakpoint
-    }
-
-    public void removeBreakpoint(int index) {
-        // TODO(optional): disable and remove the breakpoint at breakpoints[index]
-    }
-
-    public List<Breakpoint> breakpoints() {
-        return Collections.unmodifiableList(breakpoints);
-    }
 
     private void run(JThread thread) {
         var frame = thread.top();
-        var monitor = thread.context().monitor();
 
         while (thread.top() == frame) {
-            if (status == Status.STEP && steps == 0) {
-                monitor.enter(thread);
-            }
 
             System.err.println("PC: " + frame.pc().position());
 
@@ -89,10 +49,7 @@ public class JInterpreter {
 
             System.err.println("Instruction: " + op.toString());
 
-            steps--;
             op.run(thread);
-
-            // TODO(optional): handle breakpoints
         }
     }
 
@@ -143,9 +100,6 @@ public class JInterpreter {
         }
     }
 
-    public static enum Status {
-        CONTINUE, STEP, BREAK,
-    }
 
     static {
         nativeTable.put(Triple.of("lab2/IOUtil", "readInt", "()I"), (t, a) -> InputUtils.readInt());
@@ -181,5 +135,12 @@ public class JInterpreter {
             // TODO: ignore
             return null;
         });
+
+        nativeTable.put(Triple.of("java/lang/System", "registerNatives", "()V"), (t, a) -> {
+            // TODO: ignore
+            return null;
+        });
+
+
     }
 }

@@ -17,26 +17,26 @@ public class MethodDescriptors {
             switch (arr.get(0)) {
                 case '(':
                     break;
-                case 'J':  // Long
-                case 'D':  // Double
+                case Descriptors.DESC_long:
+                case Descriptors.DESC_double:
                     size += 2;
                     break;
-                case 'L':  // Class reference
+                case Descriptors.DESC_reference:
                     while (arr.get(0) != ';') {
                         arr.remove(0);
                     }
                     size += 1;
-                case '[':  // Array reference
-                    while (arr.get(0) == '[') {
+                case Descriptors.DESC_array:  // Array reference
+                    while (arr.get(0) == Descriptors.DESC_array) {
                         arr.remove(0);
                     }
                     size += 1;
-                case 'B':  // Byte
-                case 'C':  // Char
-                case 'F':  // Float
-                case 'I':  // Int
-                case 'S':  // Short
-                case 'Z':  // Boolean
+                case Descriptors.DESC_byte:
+                case Descriptors.DESC_char:
+                case Descriptors.DESC_float:
+                case Descriptors.DESC_int:
+                case Descriptors.DESC_short:
+                case Descriptors.DESC_boolean:
                     size += 1;
                     break;
                 default:
