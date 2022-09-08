@@ -1,4 +1,4 @@
-package lab2;
+package util;
 
 import lombok.SneakyThrows;
 import lombok.var;
@@ -32,7 +32,6 @@ public class TestUtils {
         args.add("-cp");
         args.add(resPath.toString());
 
-        args.add("run");
         args.add(name);
 
         var oldStdout = System.out;

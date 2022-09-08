@@ -1,6 +1,6 @@
 package lab3;
 
-import lab2.TestUtils;
+import util.TestUtils;
 import org.junit.jupiter.api.Test;
 
 public class RunClassesTest {

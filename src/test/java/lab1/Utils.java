@@ -64,7 +64,7 @@ public class Utils {
             args.add(path);
         }
 
-        args.add("dump");
+        args.add("--debug-dump");
         args.add(clazz);
         return cmd.execute(args.toArray(new String[0]));
     }
