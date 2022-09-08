@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import lombok.var;
 import vjvm.classloader.searchpath.ClassSearchPath;
 import vjvm.runtime.class_.JClass;
+import vjvm.util.Logger;
 import vjvm.vm.VMContext;
 
 import java.io.Closeable;
@@ -51,6 +52,8 @@ public class JClassLoader implements Closeable {
         for (ClassSearchPath searchPath : searchPaths) {
             var result = searchPath.findClass(descriptor);
             if (result != null) {
+                Logger.debug("Class Found: " + result);
+
                 JClass clazz = new JClass(new DataInputStream(result), this);
                 definedClass.put(descriptor, clazz);  // 缓存结果
                 return clazz;

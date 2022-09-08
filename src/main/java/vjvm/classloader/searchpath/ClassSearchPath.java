@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.function.IntFunction;
 import java.util.jar.JarFile;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 
 /**
@@ -23,38 +24,9 @@ public abstract class ClassSearchPath implements Closeable {
      * Construct search path objects with a given path.
      */
     public static ClassSearchPath[] constructSearchPath(String path) {
-        return Arrays.stream(path.split(System.getProperty("path.separator"))).map((s) -> new ClassSearchPath() {
-            @Override
-            public InputStream findClass(String name) {
-                InputStream stream = null;
-
-                if (s.endsWith(".jar")) {
-                    // 在 jar 文件中查找
-                    try {
-                        JarFile jarFile = new JarFile(s);
-                        stream = jarFile.getInputStream(new ZipEntry(name.substring(1).replace(";", "") + ".class"));
-                    } catch (Exception e) {
-//                        e.printStackTrace();
-                    }
-                } else {
-                    // 在目录下查找
-                    try {
-                        String actualPath = s + File.separator + name.substring(1).replace(";", "") + ".class";
-                        Logger.debug("Searching for path: " + actualPath);
-                        stream = Files.newInputStream(Paths.get(actualPath));
-                    } catch (Exception e) {
-//                        e.printStackTrace();
-                    }
-                }
-
-                return stream;
-            }
-
-            @Override
-            public void close() throws IOException {
-                // TODO
-            }
-        }).toArray((IntFunction<ClassSearchPath[]>) ClassSearchPath[]::new);
+        return Arrays.stream(path.split(System.getProperty("path.separator")))
+            .map(s -> s.endsWith(".jar") ? new JarFileSearchPath(s) : new ClassFileSearchPath(s))
+            .toArray(ClassSearchPath[]::new);
     }
 
     /**
