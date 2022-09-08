@@ -2,8 +2,9 @@ package vjvm.runtime.heap;
 
 import lombok.var;
 import vjvm.classfiledefs.Descriptors;
-import vjvm.runtime.classdata.JClass;
-import vjvm.utils.UnimplementedError;
+import vjvm.runtime.class_.JClass;
+import vjvm.runtime.reference.ArrayReference;
+import vjvm.runtime.reference.Reference;
 
 import java.util.HashMap;
 

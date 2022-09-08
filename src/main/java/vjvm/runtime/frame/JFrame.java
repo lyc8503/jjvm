@@ -2,9 +2,10 @@ package vjvm.runtime.frame;
 
 import lombok.Getter;
 import lombok.var;
-import vjvm.runtime.classdata.JClass;
-import vjvm.runtime.classdata.ConstantPool;
-import vjvm.runtime.classdata.MethodInfo;
+import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.class_.JClass;
+import vjvm.runtime.class_.ConstantPool;
+import vjvm.runtime.class_.MethodInfo;
 
 @Getter
 public class JFrame {

@@ -2,8 +2,8 @@ package vjvm.interpreter.instruction.constants;
 
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.classdata.MethodInfo;
-import vjvm.runtime.frame.ProgramCounter;
+import vjvm.runtime.class_.MethodInfo;
+import vjvm.runtime.ProgramCounter;
 
 public class NOP extends Instruction {
 

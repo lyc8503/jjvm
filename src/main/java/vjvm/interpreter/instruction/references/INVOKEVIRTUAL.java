@@ -3,9 +3,9 @@ package vjvm.interpreter.instruction.references;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.classdata.MethodInfo;
-import vjvm.runtime.classdata.constant.MethodRefConstant;
-import vjvm.runtime.frame.ProgramCounter;
+import vjvm.runtime.class_.MethodInfo;
+import vjvm.runtime.class_.constant.MethodRefConstant;
+import vjvm.runtime.ProgramCounter;
 
 public class INVOKEVIRTUAL extends Instruction {
     /**

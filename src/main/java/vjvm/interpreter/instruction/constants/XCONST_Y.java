@@ -6,9 +6,9 @@ import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
 import vjvm.runtime.frame.OperandStack;
-import vjvm.runtime.frame.ProgramCounter;
-import vjvm.runtime.classdata.MethodInfo;
-import vjvm.runtime.heap.Reference;
+import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.class_.MethodInfo;
+import vjvm.runtime.reference.Reference;
 
 import java.util.function.BiConsumer;
 

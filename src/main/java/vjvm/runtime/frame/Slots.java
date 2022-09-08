@@ -1,6 +1,6 @@
 package vjvm.runtime.frame;
 
-import vjvm.runtime.heap.Reference;
+import vjvm.runtime.reference.Reference;
 
 import java.util.Optional;
 

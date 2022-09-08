@@ -5,8 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.frame.ProgramCounter;
-import vjvm.runtime.classdata.MethodInfo;
+import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.class_.MethodInfo;
+import vjvm.util.Logger;
 
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -74,10 +75,10 @@ public class IF_ICMP extends Instruction {
         }
 
         if (success) {
-            System.err.println("IF DEBUG: success, byte " + branchByte);
+            Logger.debug("IF DEBUG: success, byte " + branchByte);
             pc.move(branchByte - 3);
         } else {
-            System.err.println("IF DEBUG: fail");
+            Logger.debug("IF DEBUG: fail");
         }
     }
 

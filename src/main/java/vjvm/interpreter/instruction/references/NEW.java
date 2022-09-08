@@ -3,11 +3,9 @@ package vjvm.interpreter.instruction.references;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.classdata.JClass;
-import vjvm.runtime.classdata.MethodInfo;
-import vjvm.runtime.classdata.constant.ClassInfoConstant;
-import vjvm.runtime.classdata.constant.MethodRefConstant;
-import vjvm.runtime.frame.ProgramCounter;
+import vjvm.runtime.class_.MethodInfo;
+import vjvm.runtime.class_.constant.ClassInfoConstant;
+import vjvm.runtime.ProgramCounter;
 
 public class NEW extends Instruction {
     /**

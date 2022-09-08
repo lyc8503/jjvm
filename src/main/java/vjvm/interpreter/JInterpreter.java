@@ -7,8 +7,9 @@ import vjvm.interpreter.instruction.Decoder;
 import vjvm.runtime.frame.JFrame;
 import vjvm.runtime.JThread;
 import vjvm.runtime.frame.Slots;
-import vjvm.runtime.classdata.MethodInfo;
-import vjvm.utils.InputUtils;
+import vjvm.runtime.class_.MethodInfo;
+import vjvm.util.InputUtils;
+import vjvm.util.Logger;
 
 import java.util.HashMap;
 import java.util.function.BiFunction;
@@ -43,11 +44,11 @@ public class JInterpreter {
 
         while (thread.top() == frame) {
 
-            System.err.println("PC: " + frame.pc().position());
+            Logger.trace("PC: " + frame.pc().position());
 
             var op = Decoder.decode(thread.pc(), frame.method());
 
-            System.err.println("Instruction: " + op.toString());
+            Logger.trace("Instruction: " + op.toString());
 
             op.run(thread);
         }
@@ -106,28 +107,23 @@ public class JInterpreter {
         nativeTable.put(Triple.of("lab2/IOUtil", "readLong", "()J"), (t, a) -> InputUtils.readLong());
         nativeTable.put(Triple.of("lab2/IOUtil", "readChar", "()C"), (t, a) -> InputUtils.readChar());
         nativeTable.put(Triple.of("lab2/IOUtil", "writeInt", "(I)V"), (t, a) -> {
-            System.err.println("IOUtil: int " + a.int_(0));
-            System.out.println(a.int_(0));
+            Logger.println(a.int_(0));
             return null;
         });
         nativeTable.put(Triple.of("lab2/IOUtil", "writeFloat", "(F)V"), (t, a) -> {
-            System.err.println("IOUtil: float " + a.float_(0));
-            System.out.println(a.float_(0));
+            Logger.println(a.float_(0));
             return null;
         });
         nativeTable.put(Triple.of("lab2/IOUtil", "writeLong", "(J)V"), (t, a) -> {
-            System.err.println("IOUtil: long " + a.long_(0));
-            System.out.println(a.long_(0));
+            Logger.println(a.long_(0));
             return null;
         });
         nativeTable.put(Triple.of("lab2/IOUtil", "writeDouble", "(D)V"), (t, a) -> {
-            System.err.println("IOUtil: double " + a.double_(0));
-            System.out.println(a.double_(0));
+            Logger.println(a.double_(0));
             return null;
         });
         nativeTable.put(Triple.of("lab2/IOUtil", "writeChar", "(C)V"), (t, a) -> {
-            System.err.println("IOUtil: char " + a.char_(0));
-            System.out.println(a.char_(0));
+            Logger.println(a.char_(0));
             return null;
         });
 

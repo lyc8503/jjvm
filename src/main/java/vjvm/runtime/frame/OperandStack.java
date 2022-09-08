@@ -2,7 +2,7 @@ package vjvm.runtime.frame;
 
 import lombok.Getter;
 import vjvm.classfiledefs.Descriptors;
-import vjvm.runtime.heap.Reference;
+import vjvm.runtime.reference.Reference;
 
 public class OperandStack {
     @Getter

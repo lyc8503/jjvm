@@ -1,7 +1,9 @@
 package vjvm.runtime.heap;
 
 import lombok.var;
-import vjvm.runtime.classdata.JClass;
+import vjvm.runtime.class_.JClass;
+import vjvm.runtime.reference.ArrayReference;
+import vjvm.runtime.reference.Reference;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -33,6 +35,7 @@ public class JHeap {
         var array = new Object[length];
         arrayMap.put(innerIndex, array);
         Arrays.fill(array, default_);
+
 
         innerIndex++;
         return ref;

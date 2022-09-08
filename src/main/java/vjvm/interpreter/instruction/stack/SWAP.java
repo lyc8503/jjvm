@@ -3,9 +3,9 @@ package vjvm.interpreter.instruction.stack;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.frame.ProgramCounter;
+import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.frame.Slots;
-import vjvm.runtime.classdata.MethodInfo;
+import vjvm.runtime.class_.MethodInfo;
 
 public class SWAP extends Instruction {
 

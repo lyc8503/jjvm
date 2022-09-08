@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.frame.ProgramCounter;
+import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.frame.Slots;
-import vjvm.runtime.classdata.MethodInfo;
+import vjvm.runtime.class_.MethodInfo;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 

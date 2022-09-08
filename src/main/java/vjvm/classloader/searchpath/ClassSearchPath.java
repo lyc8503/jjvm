@@ -1,5 +1,7 @@
 package vjvm.classloader.searchpath;
 
+import vjvm.util.Logger;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +40,7 @@ public abstract class ClassSearchPath implements Closeable {
                     // 在目录下查找
                     try {
                         String actualPath = s + File.separator + name.substring(1).replace(";", "") + ".class";
-                        System.err.println("Searching for path: " + actualPath);
+                        Logger.debug("Searching for path: " + actualPath);
                         stream = Files.newInputStream(Paths.get(actualPath));
                     } catch (Exception e) {
 //                        e.printStackTrace();

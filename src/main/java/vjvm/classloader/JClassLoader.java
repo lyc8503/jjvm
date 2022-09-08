@@ -4,8 +4,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.var;
 import vjvm.classloader.searchpath.ClassSearchPath;
-import vjvm.runtime.JThread;
-import vjvm.runtime.classdata.JClass;
+import vjvm.runtime.class_.JClass;
 import vjvm.vm.VMContext;
 
 import java.io.Closeable;

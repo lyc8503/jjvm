@@ -5,12 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.classdata.MethodInfo;
-import vjvm.runtime.frame.ProgramCounter;
-import vjvm.runtime.heap.ArrayReference;
-import vjvm.runtime.heap.Reference;
-
-import static vjvm.runtime.heap.Fields.getDefaultValue;
+import vjvm.runtime.class_.MethodInfo;
+import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.reference.ArrayReference;
+import vjvm.runtime.reference.Reference;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class NEWARRAY extends Instruction {

@@ -20,15 +20,14 @@ import vjvm.interpreter.instruction.math.INC;
 import vjvm.interpreter.instruction.math.NEG;
 import vjvm.interpreter.instruction.math.SHX;
 import vjvm.interpreter.instruction.references.*;
-import vjvm.interpreter.instruction.reserved.BREAKPOINT;
 import vjvm.interpreter.instruction.stack.DUP;
 import vjvm.interpreter.instruction.stack.POP;
 import vjvm.interpreter.instruction.stack.SWAP;
 import vjvm.interpreter.instruction.stores.XASTORE;
 import vjvm.interpreter.instruction.stores.XSTORE_Y;
-import vjvm.runtime.frame.ProgramCounter;
-import vjvm.runtime.classdata.MethodInfo;
-import vjvm.utils.UnimplementedInstructionError;
+import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.class_.MethodInfo;
+import vjvm.error.UnimplementedInstructionError;
 
 import java.util.function.BiFunction;
 

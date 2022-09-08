@@ -3,7 +3,8 @@ package vjvm.vm;
 import lombok.var;
 import picocli.CommandLine;
 import vjvm.classfiledefs.Descriptors;
-import vjvm.runtime.classdata.JClass;
+import vjvm.runtime.class_.JClass;
+import vjvm.util.Logger;
 
 import java.util.concurrent.Callable;
 
@@ -68,8 +69,7 @@ class Dump implements Callable<Integer> {
 
         var clazz = ctx.userLoader().loadClass(descriptor);
         if (clazz == null) {
-            // you can print anything to System.err; we won't check it
-            System.err.printf("Can not find class %s\n", className);
+            Logger.debug(String.format("Can not find class %s", className));
             return -1;
         }
 
@@ -78,38 +78,38 @@ class Dump implements Callable<Integer> {
     }
 
     private void dump(JClass clazz) {
-        System.out.println(("class name: " + clazz.thisClass()));
+        Logger.println(("class name: " + clazz.thisClass()));
 
-        System.out.println(("minor version: " + clazz.minorVersion()));
-        System.out.println(("major version: " + clazz.majorVersion()));
+        Logger.println(("minor version: " + clazz.minorVersion()));
+        Logger.println(("major version: " + clazz.majorVersion()));
 
-        System.out.printf("flags: 0x%x", clazz.accessFlags());
-        System.out.println();
+        Logger.println(String.format("flags: 0x%x", clazz.accessFlags()));
+        Logger.println("");
 
-        System.out.println("this class: " + clazz.thisClass());
-        System.out.println(("super class: " + clazz.superClass()));
+        Logger.println("this class: " + clazz.thisClass());
+        Logger.println(("super class: " + clazz.superClass()));
 
-        System.out.println("constant pool: ");
+        Logger.println("constant pool: ");
         for (int i = 1; i < clazz.constantPool().size(); i++) {
             if (clazz.constantPool().constant(i) != null) {
-                System.out.printf("#%d = %s", i, clazz.constantPool().constant(i).toString());
-                System.out.println();
+                Logger.println(String.format("#%d = %s", i, clazz.constantPool().constant(i).toString()));
+                Logger.println("");
             }
         }
 
-        System.out.println("interfaces: ");
+        Logger.println("interfaces: ");
         for (int i = 0; i < clazz.interfacesCount(); i++) {
-            System.out.println(clazz.interfaceName(i));
+            Logger.println(clazz.interfaceName(i));
         }
 
-        System.out.println("fields: ");
+        Logger.println("fields: ");
         for (int i = 0; i < clazz.fieldsCount(); i++) {
-            System.out.println(clazz.field(i).toString());
+            Logger.println(clazz.field(i).toString());
         }
 
-        System.out.println("methods: ");
+        Logger.println("methods: ");
         for (int i = 0; i < clazz.methodsCount(); i++) {
-            System.out.println(clazz.method(i).toString());
+            Logger.println(clazz.method(i).toString());
         }
 
 //        throw new UnimplementedError("TODO: dump clazz in lab 1.2; remove this for 1.1");

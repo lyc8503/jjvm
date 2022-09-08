@@ -62,6 +62,8 @@ public class VMContext {
         }
 
         // For compatibility with JDK9+
-        return new ClassSearchPath[]{new ModuleSearchPath()};
+        return new ClassSearchPath[] {
+            new ModuleSearchPath()
+        };
     }
 }

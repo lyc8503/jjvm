@@ -2,8 +2,9 @@ package vjvm.interpreter.instruction.control;
 
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.frame.ProgramCounter;
-import vjvm.runtime.classdata.MethodInfo;
+import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.class_.MethodInfo;
+import vjvm.util.Logger;
 
 public class GOTO extends Instruction {
 
@@ -17,7 +18,7 @@ public class GOTO extends Instruction {
 
     @Override
     public void run(JThread thread) {
-        System.err.println("GOTO: branchByte " + branchByte);
+        Logger.debug("GOTO: branchByte " + branchByte);
         pc.move(branchByte - 3);
 
     }

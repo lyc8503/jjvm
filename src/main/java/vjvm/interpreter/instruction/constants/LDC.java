@@ -5,11 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
-import vjvm.runtime.classdata.constant.*;
-import vjvm.runtime.frame.ProgramCounter;
-import vjvm.runtime.classdata.MethodInfo;
-import vjvm.runtime.heap.Reference;
-import vjvm.utils.UnimplementedError;
+import vjvm.runtime.class_.constant.*;
+import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.class_.MethodInfo;
+import vjvm.error.UnimplementedError;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class LDC extends Instruction {
