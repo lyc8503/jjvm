@@ -1,6 +1,8 @@
 // Shamelessly taken from jvm19 (by xxz & wym)
 package lab2;
 
+import util.IOUtil;
+
 public class Math {
   public static void test(int a, int b) {
     int c = a + b;

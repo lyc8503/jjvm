@@ -1,6 +1,8 @@
 // Shamelessly taken from jvm19 (by xxz & wym)
 package lab2;
 
+import util.IOUtil;
+
 public class Conversion {
   public static void test(float flt, double db, double bigDB, float bigFLT) {
     // d2f

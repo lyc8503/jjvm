@@ -1,5 +1,7 @@
 package lab2;
 
+import util.IOUtil;
+
 public class Conv {
   public static void main(String[] args) {
     IOUtil.writeInt((int) -1L);

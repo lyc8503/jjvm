@@ -1,6 +1,6 @@
 package lab3;
 
-import lab3.IOUtil;
+import util.IOUtil;
 
 public class Instance {
 

@@ -1,5 +1,6 @@
 package lab3;
 
+import util.IOUtil;
 class Test1 {
     public static int svar1 = 1;
     public int var1 = 1;

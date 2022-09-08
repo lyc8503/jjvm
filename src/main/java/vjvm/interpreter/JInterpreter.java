@@ -103,26 +103,26 @@ public class JInterpreter {
 
 
     static {
-        nativeTable.put(Triple.of("lab2/IOUtil", "readInt", "()I"), (t, a) -> InputUtils.readInt());
-        nativeTable.put(Triple.of("lab2/IOUtil", "readLong", "()J"), (t, a) -> InputUtils.readLong());
-        nativeTable.put(Triple.of("lab2/IOUtil", "readChar", "()C"), (t, a) -> InputUtils.readChar());
-        nativeTable.put(Triple.of("lab2/IOUtil", "writeInt", "(I)V"), (t, a) -> {
+        nativeTable.put(Triple.of("util/IOUtil", "readInt", "()I"), (t, a) -> InputUtils.readInt());
+        nativeTable.put(Triple.of("util/IOUtil", "readLong", "()J"), (t, a) -> InputUtils.readLong());
+        nativeTable.put(Triple.of("util/IOUtil", "readChar", "()C"), (t, a) -> InputUtils.readChar());
+        nativeTable.put(Triple.of("util/IOUtil", "writeInt", "(I)V"), (t, a) -> {
             Logger.println(a.int_(0));
             return null;
         });
-        nativeTable.put(Triple.of("lab2/IOUtil", "writeFloat", "(F)V"), (t, a) -> {
+        nativeTable.put(Triple.of("util/IOUtil", "writeFloat", "(F)V"), (t, a) -> {
             Logger.println(a.float_(0));
             return null;
         });
-        nativeTable.put(Triple.of("lab2/IOUtil", "writeLong", "(J)V"), (t, a) -> {
+        nativeTable.put(Triple.of("util/IOUtil", "writeLong", "(J)V"), (t, a) -> {
             Logger.println(a.long_(0));
             return null;
         });
-        nativeTable.put(Triple.of("lab2/IOUtil", "writeDouble", "(D)V"), (t, a) -> {
+        nativeTable.put(Triple.of("util/IOUtil", "writeDouble", "(D)V"), (t, a) -> {
             Logger.println(a.double_(0));
             return null;
         });
-        nativeTable.put(Triple.of("lab2/IOUtil", "writeChar", "(C)V"), (t, a) -> {
+        nativeTable.put(Triple.of("util/IOUtil", "writeChar", "(C)V"), (t, a) -> {
             Logger.println(a.char_(0));
             return null;
         });

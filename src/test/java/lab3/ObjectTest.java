@@ -3,7 +3,7 @@ package lab3;
 import util.TestUtils;
 import org.junit.jupiter.api.Test;
 
-public class RunClassesTest {
+public class ObjectTest {
 
     @Test
     public void runInstance() {

@@ -1,6 +1,8 @@
 // Shamelessly taken from jvm19 (by xxz & wym)
 package lab2;
 
+import util.IOUtil;
+
 public class Condition {
   public static void test(int small, int big, long smallL, long bigL, float smallF, float bigF, double smallD,
       double bigD) {

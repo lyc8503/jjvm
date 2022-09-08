@@ -1,5 +1,7 @@
 package lab3;
 
+import util.IOUtil;
+
 public class Polymorphism {
 
     public void print(int var) {

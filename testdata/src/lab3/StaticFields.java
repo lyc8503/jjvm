@@ -1,5 +1,7 @@
 package lab3;
 
+import util.IOUtil;
+
 class B {
     public static boolean var1 = true;
     public static float var2 = 2.33f;

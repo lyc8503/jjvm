@@ -1,5 +1,7 @@
 package lab3;
 
+import util.IOUtil;
+
 class Test4 {
     void func() {
         IOUtil.writeInt(4);

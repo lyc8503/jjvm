@@ -1,5 +1,6 @@
 package lab3;
 
+import util.IOUtil;
 public class BubbleSort {
 
     public static void main(String[] args) {

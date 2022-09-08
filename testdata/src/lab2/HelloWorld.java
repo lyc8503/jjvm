@@ -1,5 +1,7 @@
 package lab2;
 
+import util.IOUtil;
+
 public class HelloWorld {
   public static void main(String[] args) {
     IOUtil.writeChar('H');

@@ -1,5 +1,7 @@
 package lab3;
 
+import util.IOUtil;
+
 class A {
     int var = 123;
 

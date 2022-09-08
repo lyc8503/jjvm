@@ -1,6 +1,8 @@
 // Shamelessly taken from jvm19 (by xxz & wym)
 package lab2;
 
+import util.IOUtil;
+
 public class Jmp {
   public static void testJmp(boolean a, boolean b, boolean c) {
     if (a) {

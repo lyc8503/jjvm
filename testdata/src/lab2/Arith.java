@@ -1,5 +1,7 @@
 package lab2;
 
+import util.IOUtil;
+
 public class Arith {
   public static void main(String[] args) {
     float a = 3.14f, b = 2.72f;
