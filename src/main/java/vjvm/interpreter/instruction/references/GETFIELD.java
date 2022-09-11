@@ -6,6 +6,7 @@ import vjvm.runtime.JThread;
 import vjvm.runtime.class_.MethodInfo;
 import vjvm.runtime.class_.constant.FieldRefConstant;
 import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.reference.ObjectReference;
 
 
 public class GETFIELD extends Instruction {
@@ -20,7 +21,7 @@ public class GETFIELD extends Instruction {
     @Override
     public void run(JThread thread) {
         var stack = thread.top().stack();
-        var reference = stack.popReference();
+        var reference = (ObjectReference) stack.popReference();
 
         stack.push(fieldRef.nameAndType().type(), reference.getField(fieldRef));
     }

@@ -2,6 +2,8 @@ package vjvm.runtime.frame;
 
 import lombok.Getter;
 import vjvm.classfiledefs.Descriptors;
+import vjvm.runtime.reference.ArrayReference;
+import vjvm.runtime.reference.ObjectReference;
 import vjvm.runtime.reference.Reference;
 
 public class OperandStack {
@@ -115,8 +117,10 @@ public class OperandStack {
                 pushLong((long) value);
                 break;
             case Descriptors.DESC_reference:
+                pushReference((ObjectReference) value);
+                break;
             case Descriptors.DESC_array:
-                pushReference((Reference) value);
+                pushReference((ArrayReference<?>) value);
                 break;
             default:
                 throw new AssertionError();

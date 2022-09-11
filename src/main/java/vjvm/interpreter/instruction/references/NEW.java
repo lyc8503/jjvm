@@ -23,7 +23,7 @@ public class NEW extends Instruction {
     public void run(JThread thread) {
         var stack = thread.top().stack();
         classInfo.getJClass().init(thread);
-        stack.pushReference(thread.context().heap().alloc(classInfo.getJClass()));
+        stack.pushReference(thread.context().heap().objAlloc(classInfo.getJClass()));
     }
 
     @Override

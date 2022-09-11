@@ -30,15 +30,15 @@ public class POP extends Instruction {
     public void run(JThread thread) {
         var stack = thread.top().stack();
 
-        Optional<Object> o1 = stack.popSlots(1).value(0);
+        Object o1 = stack.popSlots(1).value(0);
 
-        assert o1.isPresent() || pop2;
-        assert !(o1.get() instanceof Double || o1.get() instanceof Long);
+        assert o1 != null || pop2;
+        assert !(o1 instanceof Double || o1 instanceof Long);
 
         if (pop2) {
-            Optional<Object> o2 = stack.popSlots(1).value(0);
-            assert o2.isPresent();
-            assert (o2.get() instanceof Double || o2.get() instanceof Long);
+            Object o2 = stack.popSlots(1).value(0);
+            assert o2 != null;
+            assert (o2 instanceof Double || o2 instanceof Long);
         }
     }
 

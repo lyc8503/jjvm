@@ -6,6 +6,7 @@ import vjvm.runtime.JThread;
 import vjvm.runtime.class_.MethodInfo;
 import vjvm.runtime.class_.constant.FieldRefConstant;
 import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.reference.ObjectReference;
 
 public class PUTFIELD extends Instruction {
 
@@ -21,7 +22,7 @@ public class PUTFIELD extends Instruction {
         var stack = thread.top().stack();
 
         var value = stack.pop(fieldRef.nameAndType().type());
-        var reference = stack.popReference();
+        var reference = (ObjectReference) stack.popReference();
 
         reference.putField(fieldRef, value);
     }

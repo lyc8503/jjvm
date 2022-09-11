@@ -36,10 +36,10 @@ public class IF_ACMP extends Instruction {
 
         switch (condition) {
             case EQ:
-                success = value1.innerIndex() == value2.innerIndex();
+                success = value1.equals(value2);
                 break;
             case NE:
-                success = value1.innerIndex() != value2.innerIndex();
+                success = !(value1.equals(value2));
                 break;
             default:
                 assert false;

@@ -3,6 +3,7 @@ package vjvm.runtime.heap;
 import lombok.var;
 import vjvm.runtime.class_.JClass;
 import vjvm.runtime.reference.ArrayReference;
+import vjvm.runtime.reference.ObjectReference;
 import vjvm.runtime.reference.Reference;
 
 import java.util.Arrays;
@@ -22,8 +23,8 @@ public class JHeap {
         arrayMap = new HashMap<>();
     }
 
-    public Reference alloc(JClass jClass) {
-        var ref = new Reference(this, jClass, innerIndex);
+    public Reference objAlloc(JClass jClass) {
+        var ref = new ObjectReference(this, jClass, innerIndex);
         fieldsMap.put(innerIndex, new Fields(jClass, false));
         innerIndex++;
         return ref;

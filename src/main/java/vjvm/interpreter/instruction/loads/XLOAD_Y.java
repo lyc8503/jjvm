@@ -124,7 +124,7 @@ public class XLOAD_Y<T> extends Instruction {
         var stack = thread.top().stack();
         var localVars = thread.top().vars();
 
-        T value = (T) localVars.value(index).get();
+        T value = (T) localVars.value(index);
         pushFunc.accept(stack, value);
     }
 

@@ -80,11 +80,8 @@ public class Slots {
         return (Reference) slots[index];
     }
 
-    public Optional<Object> value(int index) {
-        if (slots[index] != null) {
-            return Optional.of(slots[index]);
-        }
-        return Optional.empty();
+    public Object value(int index) {
+        return slots[index];
     }
 
     public int size() {

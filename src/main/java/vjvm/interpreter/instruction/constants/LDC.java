@@ -50,7 +50,7 @@ public class LDC extends Instruction {
             } else if (constant instanceof StringConstant) {
                 var strClass = thread.top().jClass().classLoader().loadClass("Ljava/lang/String;");
 //                strClass.init(thread);
-                opStack.pushReference(thread.context().heap().alloc(strClass));
+                opStack.pushReference(thread.context().heap().objAlloc(strClass));
             } else {
                 throw new UnimplementedError();
             }

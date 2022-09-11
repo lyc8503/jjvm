@@ -63,7 +63,7 @@ public class Fields {
     public void putField(String name, Object value) {
         // check the type
         assert map.containsKey(name);
-        assert map.get(name).getClass() == value.getClass() || value instanceof ArrayReference;
+        assert map.get(name) == Reference.NULL || map.get(name).getClass() == value.getClass() || value instanceof ArrayReference;
 
         map.put(name, value);
     }
