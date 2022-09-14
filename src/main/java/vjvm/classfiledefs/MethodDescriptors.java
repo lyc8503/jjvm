@@ -27,11 +27,13 @@ public class MethodDescriptors {
                         arr.remove(0);
                     }
                     size += 1;
+                    break;
                 case Descriptors.DESC_array:  // Array reference
                     while (arr.get(0) == Descriptors.DESC_array) {
                         arr.remove(0);
                     }
                     size += 1;
+                    break;
                 case Descriptors.DESC_byte:
                 case Descriptors.DESC_char:
                 case Descriptors.DESC_float:
