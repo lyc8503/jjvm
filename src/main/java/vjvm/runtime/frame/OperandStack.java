@@ -164,4 +164,17 @@ public class OperandStack {
     public void clear() {
         top = 0;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("top: ").append(top).append(", ");
+
+        for (int i = 0; i < top; i++) {
+            sb.append(slots.slots[i]).append("|");
+        }
+
+        return sb.toString();
+    }
 }

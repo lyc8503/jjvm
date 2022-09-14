@@ -6,6 +6,7 @@ import vjvm.runtime.JThread;
 import vjvm.runtime.class_.MethodInfo;
 import vjvm.runtime.class_.constant.MethodRefConstant;
 import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.reference.ObjectReference;
 
 public class INVOKEVIRTUAL extends Instruction {
     /**
@@ -24,6 +25,10 @@ public class INVOKEVIRTUAL extends Instruction {
     public void run(JThread thread) {
         var stack = thread.top().stack();
         var args = stack.popSlots(method.argc() + 1);  // The first slot contains objectref (this).
+
+        assert args.reference(0) instanceof ObjectReference;
+
+//        assert ((ObjectReference) args.reference(0)).jClass().isSubclassOf(method.jClass());
 
         thread.context().interpreter().invoke(method, thread, args);
     }

@@ -1,6 +1,7 @@
 package vjvm.classfiledefs;
 
 import lombok.var;
+import vjvm.util.Logger;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,6 +45,8 @@ public class MethodDescriptors {
             }
             arr.remove(0);
         }
+
+        Logger.debug(descriptor + ", count: " + size);
 
         return size;
     }

@@ -12,6 +12,8 @@ public class Fields {
 
     private final HashMap<String, Object> map;
 
+    private final JClass jClass;
+
     public static Object getDefaultValue(char desc) {
         // default values for the fields
         switch (desc) {
@@ -38,6 +40,7 @@ public class Fields {
     public Fields(JClass jClass, boolean static_) {
         map = new HashMap<>();
 
+        this.jClass = jClass;
         while (jClass.superClass() != null) {
             for (int i = 0; i < jClass.fieldsCount(); i++) {
                 var field = jClass.field(i);
@@ -71,4 +74,5 @@ public class Fields {
     public boolean containsField(String name) {
         return map.containsKey(name);
     }
+
 }

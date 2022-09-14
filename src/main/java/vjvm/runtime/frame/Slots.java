@@ -93,5 +93,4 @@ public class Slots {
             dest.slots[destBegin + i - begin] = this.slots[i];
         }
     }
-
 }
