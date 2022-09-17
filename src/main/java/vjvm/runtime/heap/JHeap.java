@@ -23,7 +23,7 @@ public class JHeap {
         arrayMap = new HashMap<>();
     }
 
-    public Reference objAlloc(JClass jClass) {
+    public ObjectReference objAlloc(JClass jClass) {
         var ref = new ObjectReference(this, jClass, innerIndex);
         fieldsMap.put(innerIndex, new Fields(jClass, false));
         innerIndex++;

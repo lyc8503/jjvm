@@ -6,6 +6,7 @@ import vjvm.runtime.JThread;
 import vjvm.runtime.class_.MethodInfo;
 import vjvm.runtime.class_.constant.MethodRefConstant;
 import vjvm.runtime.ProgramCounter;
+import vjvm.runtime.exception.JThrowable;
 import vjvm.runtime.reference.ObjectReference;
 
 public class INVOKEVIRTUAL extends Instruction {
@@ -25,6 +26,11 @@ public class INVOKEVIRTUAL extends Instruction {
     public void run(JThread thread) {
         var stack = thread.top().stack();
         var args = stack.popSlots(method.argc() + 1);  // The first slot contains objectref (this).
+
+        if (args.reference(0) == ObjectReference.NULL) {
+            var exception = thread.context().heap().objAlloc(thread.context().bootstrapLoader().loadClass("Ljava/lang/NullPointerException;"));
+            throw new JThrowable(exception);
+        }
 
         assert ((ObjectReference) args.reference(0)).jClass().isSubclassOf(method.jClass());
 

@@ -9,5 +9,18 @@ public class ExceptionTest {
         TestUtils.runClass("lab4.BasicException");
     }
 
+    @Test
+    public void runFuncException() {
+        TestUtils.runClass("lab4.FuncException");
+    }
 
+    @Test
+    public void runDoubleException() {
+        TestUtils.runClass("lab4.DoubleException");
+    }
+
+    @Test
+    public void runRuntimeException() {
+        TestUtils.runClass("lab4.RuntimeException");
+    }
 }

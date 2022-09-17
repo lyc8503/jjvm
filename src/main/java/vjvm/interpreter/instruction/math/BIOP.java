@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.var;
 import vjvm.interpreter.instruction.Instruction;
 import vjvm.runtime.JThread;
+import vjvm.runtime.exception.JThrowable;
 import vjvm.runtime.frame.OperandStack;
 import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.class_.MethodInfo;
@@ -134,7 +135,15 @@ public class BIOP<T> extends Instruction {
         T value2 = popFunc.apply(stack);
         T value1 = popFunc.apply(stack);
 
-        T result = calcFunc.apply(value1, value2);
+        T result;
+
+        try {
+            result = calcFunc.apply(value1, value2);
+        } catch (ArithmeticException e) {
+            var exception = thread.context().heap().objAlloc(thread.context().bootstrapLoader().loadClass("Ljava/lang/ArithmeticException;"));
+            throw new JThrowable(exception);
+        }
+
         pushFunc.accept(stack, result);
     }
 

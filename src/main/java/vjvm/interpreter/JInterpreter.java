@@ -68,9 +68,7 @@ public class JInterpreter {
                     Logger.debug("No handler, rethrown: " + throwable);
                     thread.pop();
 
-                    // TODO: rethrow exception
-                    assert false;
-
+                    throw throwable;
                 } else {  // Handler found, jump to the handler and clear the frame stack
                     Logger.debug("Handler target: " + handler);
 
