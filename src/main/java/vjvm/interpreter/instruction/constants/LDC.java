@@ -17,6 +17,7 @@ public class LDC extends Instruction {
     private final String name;
 
     private final boolean isLongOrDouble;
+
     public static LDC LDC(ProgramCounter pc, MethodInfo method) {
         return new LDC(pc.byte_(), "ldc", false);
     }
@@ -51,8 +52,21 @@ public class LDC extends Instruction {
                 var strClass = thread.top().jClass().classLoader().loadClass("Ljava/lang/String;");
 //                strClass.init(thread);
                 opStack.pushReference(thread.context().heap().objAlloc(strClass));
+            } else if (constant instanceof ClassInfoConstant) {
+                // The ref pushed onto the stack is not the reference to the class, but the reference to the `java.lang.Class` class !
+//                var clazz = ((ClassInfoConstant) constant).getJClass();
+//                clazz.init(thread);
+//                var ref = thread.context().heap().objAlloc(clazz);
+
+                var classInfo = ((ClassInfoConstant) constant);
+                // TODO: correctly init java.lang.Class
+
+                var classJClass = thread.context().bootstrapLoader().loadClass("Ljava/lang/Class;");
+                var ref = thread.context().heap().objAlloc(classJClass);
+
+                opStack.pushReference(ref);
             } else {
-                throw new UnimplementedError();
+                throw new UnimplementedError("ldc unknown type.");
             }
         }
     }

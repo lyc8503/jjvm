@@ -32,7 +32,8 @@ public class POP extends Instruction {
 
         Object o1 = stack.popSlots(1).value(0);
 
-        assert o1 != null || pop2;
+        // TODO: o1 might be null since Reference.NULL == null
+//        assert o1 != null || pop2;
         assert !(o1 instanceof Double || o1 instanceof Long);
 
         if (pop2) {

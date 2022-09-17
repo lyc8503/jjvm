@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.var;
 import vjvm.classloader.JClassLoader;
+import vjvm.error.UnimplementedError;
 import vjvm.runtime.JThread;
 import vjvm.runtime.class_.attribute.Attribute;
 import vjvm.runtime.class_.constant.ClassInfoConstant;
@@ -14,6 +15,7 @@ import vjvm.runtime.heap.Fields;
 import java.io.DataInput;
 import java.io.InvalidClassException;
 import java.util.Arrays;
+import java.util.Objects;
 
 import static vjvm.classfiledefs.ClassAccessFlags.*;
 
@@ -117,6 +119,9 @@ public class JClass {
 //                + "Some of them are not defined; you need to define them yourself");
     }
 
+    /**
+     * Init this Class (static Fields and init super classes)
+     */
     public void init(JThread thread) {
 
         if (initialized) return;
@@ -238,5 +243,18 @@ public class JClass {
         }
     }
 
+    // TODO: change name to isAssignable?
+    public boolean isSubclassOf(JClass jClass) {
+        // Test whether this class is a subclass of (or the same with) the provided arg.
+        var tmp = this;
 
+        while (tmp.superClass != null) {
+            if (tmp == jClass) {
+                return true;
+            }
+            tmp = classLoader.loadClass("L" + tmp.superClass + ";");
+        }
+
+        return false;
+    }
 }

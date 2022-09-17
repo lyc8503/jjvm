@@ -2,12 +2,16 @@ package vjvm.interpreter;
 
 import lombok.var;
 import org.apache.commons.lang3.tuple.Triple;
+import org.jline.utils.Log;
 import vjvm.classfiledefs.MethodDescriptors;
+import vjvm.error.UnimplementedError;
 import vjvm.interpreter.instruction.Decoder;
+import vjvm.runtime.exception.JThrowable;
 import vjvm.runtime.frame.JFrame;
 import vjvm.runtime.JThread;
 import vjvm.runtime.frame.Slots;
 import vjvm.runtime.class_.MethodInfo;
+import vjvm.runtime.reference.Reference;
 import vjvm.util.InputUtils;
 import vjvm.util.Logger;
 
@@ -28,7 +32,9 @@ public class JInterpreter {
      * @param args   the supplied arguments, index begins at 0
      */
     public void invoke(MethodInfo method, JThread thread, Slots args) {
+        Logger.debug("Invoke Method: " + method + ", " + args);
         var frame = new JFrame(method, args);
+        Logger.debug("New FRAME: " + method);
         thread.push(frame);
 
         if (method.native_()) {
@@ -44,13 +50,38 @@ public class JInterpreter {
 
         while (thread.top() == frame) {
 
-            Logger.trace("PC: " + frame.pc().position());
+            int pcPos = thread.pc().position();
 
             var op = Decoder.decode(thread.pc(), frame.method());
+            Logger.trace("Current Stack: " + frame.stack().toString());
+            Logger.trace("Instruction: " + op.toString() + ", " + thread.top());
 
-            Logger.trace("Instruction: " + op.toString());
+            try {
+                op.run(thread);
+            } catch (JThrowable throwable) {
+                Logger.debug("Throwable caught: " + throwable);
 
-            op.run(thread);
+                // Find handler in the Code attribute
+                int handler = frame.method().code().findExceptionHandler(pcPos, throwable.ref().jClass());
+
+                if (handler == -1) {  // No handler found, frame is popped and the exception is rethrown
+                    Logger.debug("No handler, rethrown: " + throwable);
+                    thread.pop();
+
+                    // TODO: rethrow exception
+                    assert false;
+
+                } else {  // Handler found, jump to the handler and clear the frame stack
+                    Logger.debug("Handler target: " + handler);
+
+                    frame.pc().position(handler);
+                    var stack = frame.stack();
+                    stack.popSlots(stack.top());
+
+                    // Push the exception reference to the stack
+                    stack.pushReference(throwable.ref());
+                }
+            }
         }
     }
 
@@ -96,8 +127,11 @@ public class JInterpreter {
             case DESC_short:
                 s.pushInt((Short) ret);
                 break;
+            case DESC_reference:
+                s.pushReference((Reference) ret);
+                break;
             default:
-                throw new Error("Invalid return type");
+                throw new UnimplementedError("Invalid return type");
         }
     }
 
@@ -137,6 +171,20 @@ public class JInterpreter {
             return null;
         });
 
+        nativeTable.put(Triple.of("java/lang/Class", "registerNatives", "()V"), (t, a) -> {
+            // TODO: ignore
+            return null;
+        });
+
+        nativeTable.put(Triple.of("java/lang/Class", "desiredAssertionStatus0", "(Ljava/lang/Class;)Z"), (t, a) -> {
+            // TODO: ignore
+            return false;
+        });
+
+        nativeTable.put(Triple.of("java/lang/Throwable", "fillInStackTrace", "(I)Ljava/lang/Throwable;"), (t, a) -> {
+            // TODO: ignore
+            return null;
+        });
 
     }
 }

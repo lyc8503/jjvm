@@ -8,6 +8,7 @@ import vjvm.runtime.JThread;
 import vjvm.runtime.frame.OperandStack;
 import vjvm.runtime.ProgramCounter;
 import vjvm.runtime.class_.MethodInfo;
+import vjvm.runtime.reference.Reference;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -37,6 +38,10 @@ public class RETURN<T> extends Instruction {
 
     public static RETURN<Double> DRETURN(ProgramCounter pc, MethodInfo method) {
         return new RETURN<>(OperandStack::popDouble, Function.identity(), OperandStack::pushDouble, "dreturn");
+    }
+
+    public static RETURN<Reference> ARETURN(ProgramCounter pc, MethodInfo method) {
+        return new RETURN<>(OperandStack::popReference, Function.identity(), OperandStack::pushReference, "areturn");
     }
 
     @Override

@@ -40,4 +40,9 @@ public class ObjectReference extends Reference{
 
         return ((ObjectReference) obj).innerIndex == this.innerIndex;
     }
+
+    @Override
+    public String toString() {
+        return "ObjectRef class: " + jClass.thisClass() + ", index: " + innerIndex;
+    }
 }

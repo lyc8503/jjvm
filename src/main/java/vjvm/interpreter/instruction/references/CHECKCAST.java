@@ -8,7 +8,7 @@ import vjvm.runtime.ProgramCounter;
 
 public class CHECKCAST extends Instruction {
 
-    public CHECKCAST(ProgramCounter pc, MethodInfo methodInfo) {
+    public CHECKCAST(ProgramCounter pc, MethodInfo method) {
         var discard = pc.ushort();
     }
 

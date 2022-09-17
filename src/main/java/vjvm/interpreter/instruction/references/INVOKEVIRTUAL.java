@@ -26,9 +26,7 @@ public class INVOKEVIRTUAL extends Instruction {
         var stack = thread.top().stack();
         var args = stack.popSlots(method.argc() + 1);  // The first slot contains objectref (this).
 
-        assert args.reference(0) instanceof ObjectReference;
-
-//        assert ((ObjectReference) args.reference(0)).jClass().isSubclassOf(method.jClass());
+        assert ((ObjectReference) args.reference(0)).jClass().isSubclassOf(method.jClass());
 
         thread.context().interpreter().invoke(method, thread, args);
     }

@@ -34,4 +34,9 @@ public class JFrame {
 
         args.copyTo(0, args.size(), vars, 0);
     }
+
+    @Override
+    public String toString() {
+        return "JFrame: " + jClass.thisClass() + "." + method + ", pc: " + pc.position();
+    }
 }

@@ -30,4 +30,6 @@ public class ClassInfoConstant extends Constant {
     public String toString() {
         return String.format("Class: %s", name());
     }
+
+
 }

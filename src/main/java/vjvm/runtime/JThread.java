@@ -1,6 +1,7 @@
 package vjvm.runtime;
 
 import lombok.Getter;
+import vjvm.runtime.exception.JThrowable;
 import vjvm.runtime.frame.JFrame;
 import vjvm.vm.VMContext;
 
